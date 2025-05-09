@@ -672,8 +672,20 @@ export class DatabaseStorage implements IStorage {
   }
   
   async createBook(insertBook: InsertBook): Promise<Book> {
+    // Make sure all nullable fields are properly handled
+    const defaultValues = {
+      description: null,
+      publisher: null,
+      publishedYear: null,
+      pageCount: null,
+      coverImageUrl: null,
+      language: null,
+      categories: null,
+      googleCategoriesRaw: null
+    };
+    
     const [book] = await db.insert(books)
-      .values(insertBook)
+      .values({ ...defaultValues, ...insertBook })
       .returning();
     
     return book;
@@ -727,7 +739,7 @@ export class DatabaseStorage implements IStorage {
     const { limit = 20, offset = 0, query, categoryId } = options;
     
     // Build all filters first
-    let filters = [eq(userBooks.status, "AVAILABLE")]; // Base filter for available books
+    const filters = [eq(userBooks.status, "AVAILABLE")]; // Base filter for available books
     
     // Add search query filter
     if (query) {
@@ -744,7 +756,7 @@ export class DatabaseStorage implements IStorage {
     // Add category filter
     if (categoryId) {
       // This is simplified - in a real DB implementation, you'd use a proper categories join
-      filters.push(sql`${books.categories}::text LIKE ${'%' + categoryId + '%'}`);
+      filters.push(sql`${books.categories}::text LIKE '%${categoryId}%'`);
     }
     
     // Execute query with all filters applied at once
@@ -785,17 +797,21 @@ export class DatabaseStorage implements IStorage {
   async createUserBook(insertUserBook: InsertUserBook): Promise<UserBook> {
     const now = new Date();
     const defaultValues = {
+      status: "AVAILABLE",
+      conditionDescription: null,
       isInShowcase: false,
       boostActive: false,
       currentBoostViews: 0,
       currentBoostClicks: 0,
+      boostPlacement: null,
+      boostExpiresAt: null,
       imageUrls: [],
       createdAt: now,
       updatedAt: now
     };
 
     const [userBook] = await db.insert(userBooks)
-      .values({ ...insertUserBook, ...defaultValues })
+      .values({ ...defaultValues, ...insertUserBook })
       .returning();
     
     return userBook;
@@ -847,8 +863,14 @@ export class DatabaseStorage implements IStorage {
   }
   
   async createBookReview(insertReview: InsertBookReview): Promise<BookReview> {
+    // Set null for optional field if undefined
+    const reviewData = {
+      ...insertReview,
+      comment: insertReview.comment ?? null
+    };
+    
     const [review] = await db.insert(bookReviews)
-      .values(insertReview)
+      .values(reviewData)
       .returning();
     
     return review;
@@ -987,8 +1009,20 @@ export class DatabaseStorage implements IStorage {
   }
   
   async createExchange(insertExchange: InsertExchange): Promise<Exchange> {
+    const now = new Date();
+    
+    // Set null for optional fields if undefined
+    const exchangeData = {
+      ...insertExchange,
+      message: insertExchange.message ?? null,
+      offeredUserBookId: insertExchange.offeredUserBookId ?? null,
+      creditAmount: insertExchange.creditAmount ?? null,
+      createdAt: now,
+      updatedAt: now
+    };
+    
     const [exchange] = await db.insert(exchanges)
-      .values(insertExchange)
+      .values(exchangeData)
       .returning();
     
     return exchange;

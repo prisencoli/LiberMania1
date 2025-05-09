@@ -1,0 +1,250 @@
+{
+  "app": {
+    "name": "LiberMania",
+    "tagline": "Bücher tauschen, Leser verbinden."
+  },
+  "auth": {
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "logout": "Abmelden",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "forgotPassword": "Passwort vergessen?",
+    "username": "Benutzername",
+    "nickname": "Spitzname",
+    "alreadyHaveAccount": "Hast du bereits ein Konto?",
+    "dontHaveAccount": "Hast du kein Konto?",
+    "signUp": "Registrieren",
+    "orContinueWith": "Oder fortfahren mit",
+    "google": "Google",
+    "facebook": "Facebook",
+    "loginSuccess": "Erfolgreich angemeldet",
+    "registerSuccess": "Erfolgreich registriert",
+    "logoutSuccess": "Erfolgreich abgemeldet",
+    "loginError": "Anmeldung fehlgeschlagen",
+    "registerError": "Registrierung fehlgeschlagen",
+    "logoutError": "Abmeldung fehlgeschlagen"
+  },
+  "nav": {
+    "home": "Startseite",
+    "availableBooks": "Stöbern",
+    "myCollection": "Meine Bücher",
+    "exchanges": "Austausch",
+    "wishlist": "Wunschliste",
+    "about": "Über uns",
+    "help": "Hilfe",
+    "contact": "Kontakt",
+    "terms": "Nutzungsbedingungen",
+    "privacy": "Datenschutz"
+  },
+  "home": {
+    "hero": {
+      "title": "Bücher tauschen, Geschichten teilen",
+      "subtitle": "Tritt der nachhaltigen Lesegemeinschaft bei. Tausche deine Bücher und entdecke neue Geschichten.",
+      "cta": "Jetzt starten"
+    },
+    "features": {
+      "title": "So funktioniert's",
+      "subtitle": "Einfaches, nachhaltiges, soziales Lesen",
+      "exchangeTitle": "Bücher tauschen",
+      "exchangeDesc": "Tausche deine Bücher mit anderen Nutzern gegen Guthaben oder direkte Tauschgeschäfte.",
+      "discoverTitle": "Neue Lektüre entdecken",
+      "discoverDesc": "Finde dein nächstes Lieblingsbuch in unserer vielfältigen Community-Bibliothek.",
+      "communityTitle": "Der Community beitreten",
+      "communityDesc": "Vernetze dich mit anderen Lesern und teile deine Leseerfahrung."
+    },
+    "stats": {
+      "title": "Unsere Community in Zahlen",
+      "users": "Nutzer",
+      "books": "Bücher",
+      "exchanges": "Austausche"
+    }
+  },
+  "books": {
+    "search": "Bücher nach Titel, Autor oder ISBN suchen",
+    "addBook": "Buch hinzufügen",
+    "addByIsbn": "Nach ISBN hinzufügen",
+    "scan": "Scannen",
+    "noResults": "Keine Bücher gefunden",
+    "loading": "Bücher werden geladen...",
+    "title": "Titel",
+    "author": "Autor",
+    "publisher": "Verlag",
+    "publishedDate": "Erscheinungsdatum",
+    "description": "Beschreibung",
+    "isbn": "ISBN",
+    "pages": "Seiten",
+    "language": "Sprache",
+    "category": "Kategorie",
+    "condition": "Zustand",
+    "addToCollection": "Zu meiner Sammlung hinzufügen",
+    "addToWishlist": "Zur Wunschliste hinzufügen",
+    "removeFromWishlist": "Von der Wunschliste entfernen",
+    "proposeExchange": "Tausch vorschlagen",
+    "details": "Details",
+    "reviews": "Rezensionen",
+    "writeReview": "Rezension schreiben",
+    "submitReview": "Absenden",
+    "rating": "Bewertung",
+    "reviewTitle": "Titel",
+    "reviewContent": "Rezension",
+    "conditions": {
+      "new": "Neu",
+      "likeNew": "Wie neu",
+      "veryGood": "Sehr gut",
+      "good": "Gut",
+      "acceptable": "Akzeptabel",
+      "poor": "Schlecht"
+    },
+    "availability": {
+      "available": "Verfügbar",
+      "notAvailable": "Nicht verfügbar",
+      "exchanged": "Getauscht"
+    }
+  },
+  "exchanges": {
+    "title": "Austausch",
+    "propose": "Tausch vorschlagen",
+    "sent": "Gesendet",
+    "received": "Erhalten",
+    "history": "Verlauf",
+    "noExchanges": "Keine Austausche gefunden",
+    "loading": "Austausche werden geladen...",
+    "status": {
+      "pending": "Ausstehend",
+      "accepted": "Akzeptiert",
+      "rejected": "Abgelehnt",
+      "canceled": "Storniert",
+      "completed": "Abgeschlossen"
+    },
+    "actions": {
+      "accept": "Akzeptieren",
+      "reject": "Ablehnen",
+      "cancel": "Stornieren",
+      "complete": "Abschließen",
+      "viewDetails": "Details anzeigen",
+      "sendMessage": "Nachricht senden"
+    },
+    "offerTypes": {
+      "book": "Buch",
+      "credits": "Guthaben"
+    },
+    "messages": {
+      "placeholder": "Gib deine Nachricht ein...",
+      "send": "Senden",
+      "noMessages": "Noch keine Nachrichten"
+    },
+    "proposeForm": {
+      "selectBook": "Wähle ein Buch zum Tauschen",
+      "selectOption": "Wähle eine Tauschoption",
+      "offerBook": "Ein Buch anbieten",
+      "offerCredits": "Guthaben anbieten",
+      "enterCredits": "Guthaben-Betrag eingeben",
+      "message": "Nachricht hinzufügen (optional)",
+      "submit": "Tausch vorschlagen"
+    }
+  },
+  "user": {
+    "profile": "Profil",
+    "settings": "Einstellungen",
+    "myCollection": "Meine Sammlung",
+    "exchanges": "Austausch",
+    "wishlist": "Wunschliste",
+    "joinedDate": "Beigetreten am",
+    "location": "Standort",
+    "bio": "Über mich",
+    "edit": "Profil bearbeiten",
+    "save": "Änderungen speichern",
+    "cancel": "Abbrechen",
+    "statistics": {
+      "booksAdded": "Bücher hinzugefügt",
+      "booksExchanged": "Bücher getauscht",
+      "reviewsWritten": "Rezensionen geschrieben"
+    }
+  },
+  "credits": {
+    "balance": "Guthaben",
+    "history": "Transaktionsverlauf",
+    "buyCredits": "Guthaben kaufen",
+    "earnCredits": "Guthaben verdienen",
+    "transactions": {
+      "earned": "Verdient",
+      "spent": "Ausgegeben",
+      "refunded": "Erstattet"
+    },
+    "purchase": {
+      "title": "Guthaben kaufen",
+      "selectPackage": "Paket auswählen",
+      "package1": "10 Guthaben",
+      "package2": "25 Guthaben",
+      "package3": "50 Guthaben",
+      "package4": "100 Guthaben",
+      "checkout": "Zur Kasse",
+      "paymentMethod": "Zahlungsmethode",
+      "cardDetails": "Kartendetails",
+      "cardNumber": "Kartennummer",
+      "cardName": "Name auf der Karte",
+      "expiryDate": "Ablaufdatum",
+      "cvc": "CVC",
+      "completePayment": "Zahlung abschließen"
+    }
+  },
+  "notifications": {
+    "title": "Benachrichtigungen",
+    "markAllRead": "Alle als gelesen markieren",
+    "empty": "Keine neuen Benachrichtigungen",
+    "viewAll": "Alle anzeigen",
+    "types": {
+      "exchangeRequest": "Tauschanfrage",
+      "exchangeAccepted": "Tausch akzeptiert",
+      "exchangeRejected": "Tausch abgelehnt",
+      "exchangeCanceled": "Tausch storniert",
+      "exchangeCompleted": "Tausch abgeschlossen",
+      "bookAvailable": "Buch verfügbar",
+      "feedbackReceived": "Feedback erhalten",
+      "boostActive": "Boost aktiv",
+      "boostExpired": "Boost abgelaufen",
+      "creditsEarned": "Guthaben verdient",
+      "creditsSpent": "Guthaben ausgegeben",
+      "newMessage": "Neue Nachricht"
+    }
+  },
+  "common": {
+    "loading": "Wird geladen...",
+    "error": "Ein Fehler ist aufgetreten",
+    "retry": "Wiederholen",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "view": "Anzeigen",
+    "confirm": "Bestätigen",
+    "back": "Zurück",
+    "next": "Weiter",
+    "submit": "Absenden",
+    "success": "Erfolg",
+    "warning": "Warnung",
+    "info": "Information",
+    "close": "Schließen",
+    "search": "Suchen",
+    "filter": "Filtern",
+    "sort": "Sortieren",
+    "asc": "Aufsteigend",
+    "desc": "Absteigend",
+    "noData": "Keine Daten verfügbar",
+    "showMore": "Mehr anzeigen",
+    "showLess": "Weniger anzeigen"
+  },
+  "errors": {
+    "required": "Dieses Feld ist erforderlich",
+    "invalidEmail": "Ungültige E-Mail-Adresse",
+    "passwordLength": "Das Passwort muss mindestens 8 Zeichen lang sein",
+    "passwordMatch": "Die Passwörter stimmen nicht überein",
+    "serverError": "Serverfehler. Bitte versuche es später erneut.",
+    "unauthorized": "Nicht autorisiert. Bitte melde dich an.",
+    "notFound": "Ressource nicht gefunden.",
+    "conflict": "Diese Ressource existiert bereits.",
+    "unknown": "Ein unbekannter Fehler ist aufgetreten."
+  }
+}

@@ -1,0 +1,250 @@
+{
+  "app": {
+    "name": "LiberMania",
+    "tagline": "Échangez des livres, connectez des lecteurs."
+  },
+  "auth": {
+    "login": "Connexion",
+    "register": "S'inscrire",
+    "logout": "Déconnexion",
+    "email": "Email",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "forgotPassword": "Mot de passe oublié ?",
+    "username": "Nom d'utilisateur",
+    "nickname": "Pseudo",
+    "alreadyHaveAccount": "Vous avez déjà un compte ?",
+    "dontHaveAccount": "Vous n'avez pas de compte ?",
+    "signUp": "S'inscrire",
+    "orContinueWith": "Ou continuer avec",
+    "google": "Google",
+    "facebook": "Facebook",
+    "loginSuccess": "Connexion réussie",
+    "registerSuccess": "Inscription réussie",
+    "logoutSuccess": "Déconnexion réussie",
+    "loginError": "Échec de la connexion",
+    "registerError": "Échec de l'inscription",
+    "logoutError": "Échec de la déconnexion"
+  },
+  "nav": {
+    "home": "Accueil",
+    "availableBooks": "Explorer",
+    "myCollection": "Mes Livres",
+    "exchanges": "Échanges",
+    "wishlist": "Liste de souhaits",
+    "about": "À propos",
+    "help": "Aide",
+    "contact": "Contact",
+    "terms": "Conditions",
+    "privacy": "Confidentialité"
+  },
+  "home": {
+    "hero": {
+      "title": "Échangez des Livres, Partagez des Histoires",
+      "subtitle": "Rejoignez la communauté de lecture durable. Échangez vos livres et découvrez de nouvelles histoires.",
+      "cta": "Commencer"
+    },
+    "features": {
+      "title": "Comment Ça Marche",
+      "subtitle": "Lecture simple, durable et sociale",
+      "exchangeTitle": "Échanger des Livres",
+      "exchangeDesc": "Échangez vos livres avec d'autres utilisateurs contre des crédits ou des échanges directs.",
+      "discoverTitle": "Découvrir de Nouvelles Lectures",
+      "discoverDesc": "Trouvez votre prochain livre préféré dans notre bibliothèque communautaire diversifiée.",
+      "communityTitle": "Rejoindre la Communauté",
+      "communityDesc": "Connectez-vous avec d'autres lecteurs et partagez votre expérience de lecture."
+    },
+    "stats": {
+      "title": "Notre Communauté en Chiffres",
+      "users": "Utilisateurs",
+      "books": "Livres",
+      "exchanges": "Échanges"
+    }
+  },
+  "books": {
+    "search": "Rechercher des livres par titre, auteur ou ISBN",
+    "addBook": "Ajouter un Livre",
+    "addByIsbn": "Ajouter par ISBN",
+    "scan": "Scanner",
+    "noResults": "Aucun livre trouvé",
+    "loading": "Chargement des livres...",
+    "title": "Titre",
+    "author": "Auteur",
+    "publisher": "Éditeur",
+    "publishedDate": "Date de publication",
+    "description": "Description",
+    "isbn": "ISBN",
+    "pages": "Pages",
+    "language": "Langue",
+    "category": "Catégorie",
+    "condition": "État",
+    "addToCollection": "Ajouter à Ma Collection",
+    "addToWishlist": "Ajouter à la Liste de Souhaits",
+    "removeFromWishlist": "Retirer de la Liste de Souhaits",
+    "proposeExchange": "Proposer un Échange",
+    "details": "Détails",
+    "reviews": "Avis",
+    "writeReview": "Écrire un Avis",
+    "submitReview": "Soumettre",
+    "rating": "Évaluation",
+    "reviewTitle": "Titre",
+    "reviewContent": "Avis",
+    "conditions": {
+      "new": "Neuf",
+      "likeNew": "Comme Neuf",
+      "veryGood": "Très Bon",
+      "good": "Bon",
+      "acceptable": "Acceptable",
+      "poor": "Médiocre"
+    },
+    "availability": {
+      "available": "Disponible",
+      "notAvailable": "Non Disponible",
+      "exchanged": "Échangé"
+    }
+  },
+  "exchanges": {
+    "title": "Échanges",
+    "propose": "Proposer un Échange",
+    "sent": "Envoyés",
+    "received": "Reçus",
+    "history": "Historique",
+    "noExchanges": "Aucun échange trouvé",
+    "loading": "Chargement des échanges...",
+    "status": {
+      "pending": "En attente",
+      "accepted": "Accepté",
+      "rejected": "Refusé",
+      "canceled": "Annulé",
+      "completed": "Terminé"
+    },
+    "actions": {
+      "accept": "Accepter",
+      "reject": "Refuser",
+      "cancel": "Annuler",
+      "complete": "Terminer",
+      "viewDetails": "Voir les Détails",
+      "sendMessage": "Envoyer un Message"
+    },
+    "offerTypes": {
+      "book": "Livre",
+      "credits": "Crédits"
+    },
+    "messages": {
+      "placeholder": "Tapez votre message...",
+      "send": "Envoyer",
+      "noMessages": "Pas encore de messages"
+    },
+    "proposeForm": {
+      "selectBook": "Sélectionnez un livre à échanger",
+      "selectOption": "Sélectionnez l'option d'échange",
+      "offerBook": "Offrir un livre",
+      "offerCredits": "Offrir des crédits",
+      "enterCredits": "Entrez le montant des crédits",
+      "message": "Ajouter un message (optionnel)",
+      "submit": "Proposer l'Échange"
+    }
+  },
+  "user": {
+    "profile": "Profil",
+    "settings": "Paramètres",
+    "myCollection": "Ma Collection",
+    "exchanges": "Échanges",
+    "wishlist": "Liste de Souhaits",
+    "joinedDate": "Inscrit le",
+    "location": "Localisation",
+    "bio": "Biographie",
+    "edit": "Modifier le Profil",
+    "save": "Enregistrer les Modifications",
+    "cancel": "Annuler",
+    "statistics": {
+      "booksAdded": "Livres Ajoutés",
+      "booksExchanged": "Livres Échangés",
+      "reviewsWritten": "Avis Écrits"
+    }
+  },
+  "credits": {
+    "balance": "Solde de Crédits",
+    "history": "Historique des Transactions",
+    "buyCredits": "Acheter des Crédits",
+    "earnCredits": "Gagner des Crédits",
+    "transactions": {
+      "earned": "Gagnés",
+      "spent": "Dépensés",
+      "refunded": "Remboursés"
+    },
+    "purchase": {
+      "title": "Acheter des Crédits",
+      "selectPackage": "Sélectionnez un Forfait",
+      "package1": "10 Crédits",
+      "package2": "25 Crédits",
+      "package3": "50 Crédits",
+      "package4": "100 Crédits",
+      "checkout": "Paiement",
+      "paymentMethod": "Méthode de Paiement",
+      "cardDetails": "Détails de la Carte",
+      "cardNumber": "Numéro de Carte",
+      "cardName": "Nom sur la Carte",
+      "expiryDate": "Date d'Expiration",
+      "cvc": "CVC",
+      "completePayment": "Finaliser le Paiement"
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Marquer Tout comme Lu",
+    "empty": "Aucune nouvelle notification",
+    "viewAll": "Voir Tout",
+    "types": {
+      "exchangeRequest": "Demande d'Échange",
+      "exchangeAccepted": "Échange Accepté",
+      "exchangeRejected": "Échange Refusé",
+      "exchangeCanceled": "Échange Annulé",
+      "exchangeCompleted": "Échange Terminé",
+      "bookAvailable": "Livre Disponible",
+      "feedbackReceived": "Commentaire Reçu",
+      "boostActive": "Boost Actif",
+      "boostExpired": "Boost Expiré",
+      "creditsEarned": "Crédits Gagnés",
+      "creditsSpent": "Crédits Dépensés",
+      "newMessage": "Nouveau Message"
+    }
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur s'est produite",
+    "retry": "Réessayer",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "view": "Voir",
+    "confirm": "Confirmer",
+    "back": "Retour",
+    "next": "Suivant",
+    "submit": "Soumettre",
+    "success": "Succès",
+    "warning": "Avertissement",
+    "info": "Information",
+    "close": "Fermer",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "sort": "Trier",
+    "asc": "Croissant",
+    "desc": "Décroissant",
+    "noData": "Aucune donnée disponible",
+    "showMore": "Afficher Plus",
+    "showLess": "Afficher Moins"
+  },
+  "errors": {
+    "required": "Ce champ est obligatoire",
+    "invalidEmail": "Adresse email invalide",
+    "passwordLength": "Le mot de passe doit contenir au moins 8 caractères",
+    "passwordMatch": "Les mots de passe ne correspondent pas",
+    "serverError": "Erreur du serveur. Veuillez réessayer plus tard.",
+    "unauthorized": "Non autorisé. Veuillez vous connecter.",
+    "notFound": "Ressource introuvable.",
+    "conflict": "Cette ressource existe déjà.",
+    "unknown": "Une erreur inconnue s'est produite."
+  }
+}

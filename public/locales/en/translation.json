@@ -1,0 +1,250 @@
+{
+  "app": {
+    "name": "LiberMania",
+    "tagline": "Exchange books, connect readers."
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Sign Up",
+    "logout": "Logout",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot Password?",
+    "username": "Username",
+    "nickname": "Nickname",
+    "alreadyHaveAccount": "Already have an account?",
+    "dontHaveAccount": "Don't have an account?",
+    "signUp": "Sign up",
+    "orContinueWith": "Or continue with",
+    "google": "Google",
+    "facebook": "Facebook",
+    "loginSuccess": "Logged in successfully",
+    "registerSuccess": "Registered successfully",
+    "logoutSuccess": "Logged out successfully",
+    "loginError": "Login failed",
+    "registerError": "Registration failed",
+    "logoutError": "Logout failed"
+  },
+  "nav": {
+    "home": "Home",
+    "availableBooks": "Browse",
+    "myCollection": "My Books",
+    "exchanges": "Exchanges",
+    "wishlist": "Wishlist",
+    "about": "About",
+    "help": "Help",
+    "contact": "Contact",
+    "terms": "Terms",
+    "privacy": "Privacy"
+  },
+  "home": {
+    "hero": {
+      "title": "Exchange Books, Share Stories",
+      "subtitle": "Join the sustainable reading community. Exchange your books and discover new stories.",
+      "cta": "Get Started"
+    },
+    "features": {
+      "title": "How It Works",
+      "subtitle": "Simple, sustainable, social reading",
+      "exchangeTitle": "Exchange Books",
+      "exchangeDesc": "Trade your books with other users for credits or direct exchanges.",
+      "discoverTitle": "Discover New Reads",
+      "discoverDesc": "Find your next favorite book from our diverse community library.",
+      "communityTitle": "Join the Community",
+      "communityDesc": "Connect with fellow readers and share your reading experience."
+    },
+    "stats": {
+      "title": "Our Community in Numbers",
+      "users": "Users",
+      "books": "Books",
+      "exchanges": "Exchanges"
+    }
+  },
+  "books": {
+    "search": "Search books by title, author, or ISBN",
+    "addBook": "Add Book",
+    "addByIsbn": "Add by ISBN",
+    "scan": "Scan",
+    "noResults": "No books found",
+    "loading": "Loading books...",
+    "title": "Title",
+    "author": "Author",
+    "publisher": "Publisher",
+    "publishedDate": "Published Date",
+    "description": "Description",
+    "isbn": "ISBN",
+    "pages": "Pages",
+    "language": "Language",
+    "category": "Category",
+    "condition": "Condition",
+    "addToCollection": "Add to My Collection",
+    "addToWishlist": "Add to Wishlist",
+    "removeFromWishlist": "Remove from Wishlist",
+    "proposeExchange": "Propose Exchange",
+    "details": "Details",
+    "reviews": "Reviews",
+    "writeReview": "Write a Review",
+    "submitReview": "Submit",
+    "rating": "Rating",
+    "reviewTitle": "Title",
+    "reviewContent": "Review",
+    "conditions": {
+      "new": "New",
+      "likeNew": "Like New",
+      "veryGood": "Very Good",
+      "good": "Good",
+      "acceptable": "Acceptable",
+      "poor": "Poor"
+    },
+    "availability": {
+      "available": "Available",
+      "notAvailable": "Not Available",
+      "exchanged": "Exchanged"
+    }
+  },
+  "exchanges": {
+    "title": "Exchanges",
+    "propose": "Propose Exchange",
+    "sent": "Sent",
+    "received": "Received",
+    "history": "History",
+    "noExchanges": "No exchanges found",
+    "loading": "Loading exchanges...",
+    "status": {
+      "pending": "Pending",
+      "accepted": "Accepted",
+      "rejected": "Rejected",
+      "canceled": "Canceled",
+      "completed": "Completed"
+    },
+    "actions": {
+      "accept": "Accept",
+      "reject": "Reject",
+      "cancel": "Cancel",
+      "complete": "Complete",
+      "viewDetails": "View Details",
+      "sendMessage": "Send Message"
+    },
+    "offerTypes": {
+      "book": "Book",
+      "credits": "Credits"
+    },
+    "messages": {
+      "placeholder": "Type your message...",
+      "send": "Send",
+      "noMessages": "No messages yet"
+    },
+    "proposeForm": {
+      "selectBook": "Select a book to exchange",
+      "selectOption": "Select exchange option",
+      "offerBook": "Offer a book",
+      "offerCredits": "Offer credits",
+      "enterCredits": "Enter credit amount",
+      "message": "Add a message (optional)",
+      "submit": "Propose Exchange"
+    }
+  },
+  "user": {
+    "profile": "Profile",
+    "settings": "Settings",
+    "myCollection": "My Collection",
+    "exchanges": "Exchanges",
+    "wishlist": "Wishlist",
+    "joinedDate": "Joined",
+    "location": "Location",
+    "bio": "Bio",
+    "edit": "Edit Profile",
+    "save": "Save Changes",
+    "cancel": "Cancel",
+    "statistics": {
+      "booksAdded": "Books Added",
+      "booksExchanged": "Books Exchanged",
+      "reviewsWritten": "Reviews Written"
+    }
+  },
+  "credits": {
+    "balance": "Credit Balance",
+    "history": "Transaction History",
+    "buyCredits": "Buy Credits",
+    "earnCredits": "Earn Credits",
+    "transactions": {
+      "earned": "Earned",
+      "spent": "Spent",
+      "refunded": "Refunded"
+    },
+    "purchase": {
+      "title": "Purchase Credits",
+      "selectPackage": "Select a Package",
+      "package1": "10 Credits",
+      "package2": "25 Credits",
+      "package3": "50 Credits",
+      "package4": "100 Credits",
+      "checkout": "Checkout",
+      "paymentMethod": "Payment Method",
+      "cardDetails": "Card Details",
+      "cardNumber": "Card Number",
+      "cardName": "Name on Card",
+      "expiryDate": "Expiry Date",
+      "cvc": "CVC",
+      "completePayment": "Complete Payment"
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Mark All as Read",
+    "empty": "No new notifications",
+    "viewAll": "View All",
+    "types": {
+      "exchangeRequest": "Exchange Request",
+      "exchangeAccepted": "Exchange Accepted",
+      "exchangeRejected": "Exchange Rejected",
+      "exchangeCanceled": "Exchange Canceled",
+      "exchangeCompleted": "Exchange Completed",
+      "bookAvailable": "Book Available",
+      "feedbackReceived": "Feedback Received",
+      "boostActive": "Boost Active",
+      "boostExpired": "Boost Expired",
+      "creditsEarned": "Credits Earned",
+      "creditsSpent": "Credits Spent",
+      "newMessage": "New Message"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Retry",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Information",
+    "close": "Close",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "asc": "Ascending",
+    "desc": "Descending",
+    "noData": "No data available",
+    "showMore": "Show More",
+    "showLess": "Show Less"
+  },
+  "errors": {
+    "required": "This field is required",
+    "invalidEmail": "Invalid email address",
+    "passwordLength": "Password must be at least 8 characters",
+    "passwordMatch": "Passwords do not match",
+    "serverError": "Server error. Please try again later.",
+    "unauthorized": "Unauthorized. Please login.",
+    "notFound": "Resource not found.",
+    "conflict": "This resource already exists.",
+    "unknown": "An unknown error occurred."
+  }
+}

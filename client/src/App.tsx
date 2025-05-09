@@ -19,6 +19,7 @@ import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import MobileNavigation from "@/components/layout/mobile-navigation";
 import { useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 
 function Router() {
   return (

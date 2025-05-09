@@ -1,0 +1,250 @@
+{
+  "app": {
+    "name": "LiberMania",
+    "tagline": "Intercambia libros, conecta lectores."
+  },
+  "auth": {
+    "login": "Iniciar sesión",
+    "register": "Registrarse",
+    "logout": "Cerrar sesión",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "confirmPassword": "Confirmar contraseña",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "username": "Nombre de usuario",
+    "nickname": "Apodo",
+    "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+    "dontHaveAccount": "¿No tienes una cuenta?",
+    "signUp": "Registrarse",
+    "orContinueWith": "O continuar con",
+    "google": "Google",
+    "facebook": "Facebook",
+    "loginSuccess": "Sesión iniciada correctamente",
+    "registerSuccess": "Registro realizado correctamente",
+    "logoutSuccess": "Sesión cerrada correctamente",
+    "loginError": "Error al iniciar sesión",
+    "registerError": "Error al registrarse",
+    "logoutError": "Error al cerrar sesión"
+  },
+  "nav": {
+    "home": "Inicio",
+    "availableBooks": "Explorar",
+    "myCollection": "Mis Libros",
+    "exchanges": "Intercambios",
+    "wishlist": "Lista de deseos",
+    "about": "Acerca de",
+    "help": "Ayuda",
+    "contact": "Contacto",
+    "terms": "Términos",
+    "privacy": "Privacidad"
+  },
+  "home": {
+    "hero": {
+      "title": "Intercambia Libros, Comparte Historias",
+      "subtitle": "Únete a la comunidad de lectura sostenible. Intercambia tus libros y descubre nuevas historias.",
+      "cta": "Comenzar"
+    },
+    "features": {
+      "title": "Cómo Funciona",
+      "subtitle": "Lectura simple, sostenible y social",
+      "exchangeTitle": "Intercambiar Libros",
+      "exchangeDesc": "Intercambia tus libros con otros usuarios por créditos o intercambios directos.",
+      "discoverTitle": "Descubrir Nuevas Lecturas",
+      "discoverDesc": "Encuentra tu próximo libro favorito en nuestra diversa biblioteca comunitaria.",
+      "communityTitle": "Únete a la Comunidad",
+      "communityDesc": "Conéctate con otros lectores y comparte tu experiencia de lectura."
+    },
+    "stats": {
+      "title": "Nuestra Comunidad en Números",
+      "users": "Usuarios",
+      "books": "Libros",
+      "exchanges": "Intercambios"
+    }
+  },
+  "books": {
+    "search": "Buscar libros por título, autor o ISBN",
+    "addBook": "Añadir Libro",
+    "addByIsbn": "Añadir por ISBN",
+    "scan": "Escanear",
+    "noResults": "No se encontraron libros",
+    "loading": "Cargando libros...",
+    "title": "Título",
+    "author": "Autor",
+    "publisher": "Editorial",
+    "publishedDate": "Fecha de publicación",
+    "description": "Descripción",
+    "isbn": "ISBN",
+    "pages": "Páginas",
+    "language": "Idioma",
+    "category": "Categoría",
+    "condition": "Estado",
+    "addToCollection": "Añadir a Mi Colección",
+    "addToWishlist": "Añadir a Lista de Deseos",
+    "removeFromWishlist": "Quitar de Lista de Deseos",
+    "proposeExchange": "Proponer Intercambio",
+    "details": "Detalles",
+    "reviews": "Reseñas",
+    "writeReview": "Escribir una Reseña",
+    "submitReview": "Enviar",
+    "rating": "Valoración",
+    "reviewTitle": "Título",
+    "reviewContent": "Reseña",
+    "conditions": {
+      "new": "Nuevo",
+      "likeNew": "Como Nuevo",
+      "veryGood": "Muy Bueno",
+      "good": "Bueno",
+      "acceptable": "Aceptable",
+      "poor": "Deficiente"
+    },
+    "availability": {
+      "available": "Disponible",
+      "notAvailable": "No Disponible",
+      "exchanged": "Intercambiado"
+    }
+  },
+  "exchanges": {
+    "title": "Intercambios",
+    "propose": "Proponer Intercambio",
+    "sent": "Enviados",
+    "received": "Recibidos",
+    "history": "Historial",
+    "noExchanges": "No se encontraron intercambios",
+    "loading": "Cargando intercambios...",
+    "status": {
+      "pending": "Pendiente",
+      "accepted": "Aceptado",
+      "rejected": "Rechazado",
+      "canceled": "Cancelado",
+      "completed": "Completado"
+    },
+    "actions": {
+      "accept": "Aceptar",
+      "reject": "Rechazar",
+      "cancel": "Cancelar",
+      "complete": "Completar",
+      "viewDetails": "Ver Detalles",
+      "sendMessage": "Enviar Mensaje"
+    },
+    "offerTypes": {
+      "book": "Libro",
+      "credits": "Créditos"
+    },
+    "messages": {
+      "placeholder": "Escribe tu mensaje...",
+      "send": "Enviar",
+      "noMessages": "Aún no hay mensajes"
+    },
+    "proposeForm": {
+      "selectBook": "Selecciona un libro para intercambiar",
+      "selectOption": "Selecciona la opción de intercambio",
+      "offerBook": "Ofrecer un libro",
+      "offerCredits": "Ofrecer créditos",
+      "enterCredits": "Introduce la cantidad de créditos",
+      "message": "Añadir un mensaje (opcional)",
+      "submit": "Proponer Intercambio"
+    }
+  },
+  "user": {
+    "profile": "Perfil",
+    "settings": "Configuración",
+    "myCollection": "Mi Colección",
+    "exchanges": "Intercambios",
+    "wishlist": "Lista de Deseos",
+    "joinedDate": "Se unió el",
+    "location": "Ubicación",
+    "bio": "Biografía",
+    "edit": "Editar Perfil",
+    "save": "Guardar Cambios",
+    "cancel": "Cancelar",
+    "statistics": {
+      "booksAdded": "Libros Añadidos",
+      "booksExchanged": "Libros Intercambiados",
+      "reviewsWritten": "Reseñas Escritas"
+    }
+  },
+  "credits": {
+    "balance": "Saldo de Créditos",
+    "history": "Historial de Transacciones",
+    "buyCredits": "Comprar Créditos",
+    "earnCredits": "Ganar Créditos",
+    "transactions": {
+      "earned": "Ganados",
+      "spent": "Gastados",
+      "refunded": "Reembolsados"
+    },
+    "purchase": {
+      "title": "Comprar Créditos",
+      "selectPackage": "Selecciona un Paquete",
+      "package1": "10 Créditos",
+      "package2": "25 Créditos",
+      "package3": "50 Créditos",
+      "package4": "100 Créditos",
+      "checkout": "Realizar Pago",
+      "paymentMethod": "Método de Pago",
+      "cardDetails": "Detalles de la Tarjeta",
+      "cardNumber": "Número de Tarjeta",
+      "cardName": "Nombre en la Tarjeta",
+      "expiryDate": "Fecha de Vencimiento",
+      "cvc": "CVC",
+      "completePayment": "Completar Pago"
+    }
+  },
+  "notifications": {
+    "title": "Notificaciones",
+    "markAllRead": "Marcar Todo como Leído",
+    "empty": "No hay nuevas notificaciones",
+    "viewAll": "Ver Todo",
+    "types": {
+      "exchangeRequest": "Solicitud de Intercambio",
+      "exchangeAccepted": "Intercambio Aceptado",
+      "exchangeRejected": "Intercambio Rechazado",
+      "exchangeCanceled": "Intercambio Cancelado",
+      "exchangeCompleted": "Intercambio Completado",
+      "bookAvailable": "Libro Disponible",
+      "feedbackReceived": "Comentario Recibido",
+      "boostActive": "Impulso Activo",
+      "boostExpired": "Impulso Expirado",
+      "creditsEarned": "Créditos Ganados",
+      "creditsSpent": "Créditos Gastados",
+      "newMessage": "Nuevo Mensaje"
+    }
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Se produjo un error",
+    "retry": "Reintentar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "view": "Ver",
+    "confirm": "Confirmar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "submit": "Enviar",
+    "success": "Éxito",
+    "warning": "Advertencia",
+    "info": "Información",
+    "close": "Cerrar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "asc": "Ascendente",
+    "desc": "Descendente",
+    "noData": "No hay datos disponibles",
+    "showMore": "Mostrar Más",
+    "showLess": "Mostrar Menos"
+  },
+  "errors": {
+    "required": "Este campo es obligatorio",
+    "invalidEmail": "Dirección de correo electrónico inválida",
+    "passwordLength": "La contraseña debe tener al menos 8 caracteres",
+    "passwordMatch": "Las contraseñas no coinciden",
+    "serverError": "Error del servidor. Inténtalo de nuevo más tarde.",
+    "unauthorized": "No autorizado. Por favor, inicia sesión.",
+    "notFound": "Recurso no encontrado.",
+    "conflict": "Este recurso ya existe.",
+    "unknown": "Se produjo un error desconocido."
+  }
+}

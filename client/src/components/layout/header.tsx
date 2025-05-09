@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'wouter';
 import { Search, Bell, Menu, LogOut, User as UserIcon, Book, BarChart2, Heart, CreditCard, Settings } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -15,12 +16,14 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import LanguageSelector from '@/components/language-selector';
 import { useQuery } from '@tanstack/react-query';
 
 export default function Header() {
   const { user, logoutMutation } = useAuth();
   const [location, navigate] = useLocation();
   const [showMobileSearch, setShowMobileSearch] = useState(false);
+  const { t } = useTranslation();
 
   // Get unread notifications count
   const { data: notifications } = useQuery<{read: boolean}[]>({
@@ -47,7 +50,7 @@ export default function Header() {
           <div className="relative w-full">
             <Input 
               type="text" 
-              placeholder="Search books by title, author, or ISBN" 
+              placeholder={t('books.search')}
               className="w-full px-4 py-2 pl-10 rounded-full"
             />
             <Search className="h-5 w-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-dark" />
@@ -58,14 +61,17 @@ export default function Header() {
         {user ? (
           <nav className="hidden md:flex items-center space-x-6">
             <Link href="/books/available" className="text-neutral-darkest hover:text-primary font-medium transition duration-150">
-              Browse
+              {t('nav.availableBooks')}
             </Link>
             <Link href="/books/my-collection" className="text-neutral-darkest hover:text-primary font-medium transition duration-150">
-              My Books
+              {t('nav.myCollection')}
             </Link>
             <Link href="/exchanges" className="text-neutral-darkest hover:text-primary font-medium transition duration-150">
-              Exchanges
+              {t('nav.exchanges')}
             </Link>
+            
+            {/* Language Selector */}
+            <LanguageSelector />
             
             {/* Notifications */}
             <DropdownMenu>
@@ -80,18 +86,18 @@ export default function Header() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-80">
-                <DropdownMenuLabel>Notifications</DropdownMenuLabel>
+                <DropdownMenuLabel>{t('notifications.title')}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <div className="max-h-80 overflow-auto">
                   {/* Notification items would go here */}
                   <div className="py-2 px-3 text-sm text-neutral-dark">
-                    No new notifications
+                    {t('notifications.empty')}
                   </div>
                 </div>
                 <DropdownMenuSeparator />
                 <div className="p-2">
                   <Button size="sm" variant="outline" className="w-full">
-                    View All
+                    {t('notifications.viewAll')}
                   </Button>
                 </div>
               </DropdownMenuContent>
@@ -119,40 +125,43 @@ export default function Header() {
                 <DropdownMenuGroup>
                   <DropdownMenuItem onClick={() => navigate('/profile')}>
                     <UserIcon className="mr-2 h-4 w-4" />
-                    <span>Profile</span>
+                    <span>{t('user.profile')}</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={() => navigate('/books/my-collection')}>
                     <Book className="mr-2 h-4 w-4" />
-                    <span>My Collection</span>
+                    <span>{t('user.myCollection')}</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={() => navigate('/my-activity/favorites')}>
                     <Heart className="mr-2 h-4 w-4" />
-                    <span>Wishlist</span>
+                    <span>{t('user.wishlist')}</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={() => navigate('/credits/purchase')}>
                     <BarChart2 className="mr-2 h-4 w-4" />
-                    <span>Buy Credits</span>
+                    <span>{t('credits.buyCredits')}</span>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={() => navigate('/settings')}>
                   <Settings className="mr-2 h-4 w-4" />
-                  <span>Settings</span>
+                  <span>{t('user.settings')}</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => logoutMutation.mutate()}>
                   <LogOut className="mr-2 h-4 w-4" />
-                  <span>Logout</span>
+                  <span>{t('auth.logout')}</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </nav>
         ) : (
           <nav className="hidden md:flex items-center space-x-4">
+            {/* Language Selector for non-authenticated users */}
+            <LanguageSelector />
+            
             <Link href="/auth">
-              <Button variant="ghost">Login</Button>
+              <Button variant="ghost">{t('auth.login')}</Button>
             </Link>
             <Link href="/auth">
-              <Button>Sign Up</Button>
+              <Button>{t('auth.register')}</Button>
             </Link>
           </nav>
         )}
@@ -185,7 +194,7 @@ export default function Header() {
             <div className="relative">
               <Input 
                 type="text" 
-                placeholder="Search books by title, author, or ISBN" 
+                placeholder={t('books.search')} 
                 className="w-full px-4 py-2 pl-10 rounded-full"
               />
               <Search className="h-5 w-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-dark" />

@@ -1,0 +1,250 @@
+{
+  "app": {
+    "name": "LiberMania",
+    "tagline": "Scambia libri, connetti lettori."
+  },
+  "auth": {
+    "login": "Accedi",
+    "register": "Registrati",
+    "logout": "Esci",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Conferma Password",
+    "forgotPassword": "Password dimenticata?",
+    "username": "Nome utente",
+    "nickname": "Nickname",
+    "alreadyHaveAccount": "Hai già un account?",
+    "dontHaveAccount": "Non hai un account?",
+    "signUp": "Registrati",
+    "orContinueWith": "O continua con",
+    "google": "Google",
+    "facebook": "Facebook",
+    "loginSuccess": "Accesso effettuato con successo",
+    "registerSuccess": "Registrazione effettuata con successo",
+    "logoutSuccess": "Disconnessione effettuata con successo",
+    "loginError": "Accesso fallito",
+    "registerError": "Registrazione fallita",
+    "logoutError": "Disconnessione fallita"
+  },
+  "nav": {
+    "home": "Home",
+    "availableBooks": "Sfoglia",
+    "myCollection": "I miei libri",
+    "exchanges": "Scambi",
+    "wishlist": "Lista dei desideri",
+    "about": "Chi siamo",
+    "help": "Aiuto",
+    "contact": "Contatti",
+    "terms": "Termini",
+    "privacy": "Privacy"
+  },
+  "home": {
+    "hero": {
+      "title": "Scambia Libri, Condividi Storie",
+      "subtitle": "Unisciti alla comunità di lettura sostenibile. Scambia i tuoi libri e scopri nuove storie.",
+      "cta": "Inizia ora"
+    },
+    "features": {
+      "title": "Come Funziona",
+      "subtitle": "Lettura semplice, sostenibile e sociale",
+      "exchangeTitle": "Scambia Libri",
+      "exchangeDesc": "Scambia i tuoi libri con altri utenti per crediti o scambi diretti.",
+      "discoverTitle": "Scopri Nuove Letture",
+      "discoverDesc": "Trova il tuo prossimo libro preferito dalla nostra varia biblioteca comunitaria.",
+      "communityTitle": "Unisciti alla Comunità",
+      "communityDesc": "Connettiti con altri lettori e condividi la tua esperienza di lettura."
+    },
+    "stats": {
+      "title": "La Nostra Comunità in Numeri",
+      "users": "Utenti",
+      "books": "Libri",
+      "exchanges": "Scambi"
+    }
+  },
+  "books": {
+    "search": "Cerca libri per titolo, autore o ISBN",
+    "addBook": "Aggiungi Libro",
+    "addByIsbn": "Aggiungi tramite ISBN",
+    "scan": "Scansiona",
+    "noResults": "Nessun libro trovato",
+    "loading": "Caricamento libri...",
+    "title": "Titolo",
+    "author": "Autore",
+    "publisher": "Editore",
+    "publishedDate": "Data di pubblicazione",
+    "description": "Descrizione",
+    "isbn": "ISBN",
+    "pages": "Pagine",
+    "language": "Lingua",
+    "category": "Categoria",
+    "condition": "Condizione",
+    "addToCollection": "Aggiungi alla Mia Collezione",
+    "addToWishlist": "Aggiungi alla Lista dei Desideri",
+    "removeFromWishlist": "Rimuovi dalla Lista dei Desideri",
+    "proposeExchange": "Proponi Scambio",
+    "details": "Dettagli",
+    "reviews": "Recensioni",
+    "writeReview": "Scrivi una Recensione",
+    "submitReview": "Invia",
+    "rating": "Valutazione",
+    "reviewTitle": "Titolo",
+    "reviewContent": "Recensione",
+    "conditions": {
+      "new": "Nuovo",
+      "likeNew": "Come Nuovo",
+      "veryGood": "Molto Buono",
+      "good": "Buono",
+      "acceptable": "Accettabile",
+      "poor": "Scarso"
+    },
+    "availability": {
+      "available": "Disponibile",
+      "notAvailable": "Non Disponibile",
+      "exchanged": "Scambiato"
+    }
+  },
+  "exchanges": {
+    "title": "Scambi",
+    "propose": "Proponi Scambio",
+    "sent": "Inviati",
+    "received": "Ricevuti",
+    "history": "Cronologia",
+    "noExchanges": "Nessuno scambio trovato",
+    "loading": "Caricamento scambi...",
+    "status": {
+      "pending": "In attesa",
+      "accepted": "Accettato",
+      "rejected": "Rifiutato",
+      "canceled": "Annullato",
+      "completed": "Completato"
+    },
+    "actions": {
+      "accept": "Accetta",
+      "reject": "Rifiuta",
+      "cancel": "Annulla",
+      "complete": "Completa",
+      "viewDetails": "Visualizza Dettagli",
+      "sendMessage": "Invia Messaggio"
+    },
+    "offerTypes": {
+      "book": "Libro",
+      "credits": "Crediti"
+    },
+    "messages": {
+      "placeholder": "Scrivi il tuo messaggio...",
+      "send": "Invia",
+      "noMessages": "Ancora nessun messaggio"
+    },
+    "proposeForm": {
+      "selectBook": "Seleziona un libro da scambiare",
+      "selectOption": "Seleziona l'opzione di scambio",
+      "offerBook": "Offri un libro",
+      "offerCredits": "Offri crediti",
+      "enterCredits": "Inserisci l'importo dei crediti",
+      "message": "Aggiungi un messaggio (opzionale)",
+      "submit": "Proponi Scambio"
+    }
+  },
+  "user": {
+    "profile": "Profilo",
+    "settings": "Impostazioni",
+    "myCollection": "La Mia Collezione",
+    "exchanges": "Scambi",
+    "wishlist": "Lista dei Desideri",
+    "joinedDate": "Iscritto il",
+    "location": "Posizione",
+    "bio": "Biografia",
+    "edit": "Modifica Profilo",
+    "save": "Salva Modifiche",
+    "cancel": "Annulla",
+    "statistics": {
+      "booksAdded": "Libri Aggiunti",
+      "booksExchanged": "Libri Scambiati",
+      "reviewsWritten": "Recensioni Scritte"
+    }
+  },
+  "credits": {
+    "balance": "Saldo Crediti",
+    "history": "Cronologia Transazioni",
+    "buyCredits": "Acquista Crediti",
+    "earnCredits": "Guadagna Crediti",
+    "transactions": {
+      "earned": "Guadagnati",
+      "spent": "Spesi",
+      "refunded": "Rimborsati"
+    },
+    "purchase": {
+      "title": "Acquista Crediti",
+      "selectPackage": "Seleziona un Pacchetto",
+      "package1": "10 Crediti",
+      "package2": "25 Crediti",
+      "package3": "50 Crediti",
+      "package4": "100 Crediti",
+      "checkout": "Procedi al Pagamento",
+      "paymentMethod": "Metodo di Pagamento",
+      "cardDetails": "Dettagli Carta",
+      "cardNumber": "Numero Carta",
+      "cardName": "Nome sulla Carta",
+      "expiryDate": "Data di Scadenza",
+      "cvc": "CVC",
+      "completePayment": "Completa Pagamento"
+    }
+  },
+  "notifications": {
+    "title": "Notifiche",
+    "markAllRead": "Segna Tutte come Lette",
+    "empty": "Nessuna nuova notifica",
+    "viewAll": "Vedi Tutte",
+    "types": {
+      "exchangeRequest": "Richiesta di Scambio",
+      "exchangeAccepted": "Scambio Accettato",
+      "exchangeRejected": "Scambio Rifiutato",
+      "exchangeCanceled": "Scambio Annullato",
+      "exchangeCompleted": "Scambio Completato",
+      "bookAvailable": "Libro Disponibile",
+      "feedbackReceived": "Feedback Ricevuto",
+      "boostActive": "Boost Attivo",
+      "boostExpired": "Boost Scaduto",
+      "creditsEarned": "Crediti Guadagnati",
+      "creditsSpent": "Crediti Spesi",
+      "newMessage": "Nuovo Messaggio"
+    }
+  },
+  "common": {
+    "loading": "Caricamento...",
+    "error": "Si è verificato un errore",
+    "retry": "Riprova",
+    "save": "Salva",
+    "cancel": "Annulla",
+    "delete": "Elimina",
+    "edit": "Modifica",
+    "view": "Visualizza",
+    "confirm": "Conferma",
+    "back": "Indietro",
+    "next": "Avanti",
+    "submit": "Invia",
+    "success": "Successo",
+    "warning": "Avviso",
+    "info": "Informazione",
+    "close": "Chiudi",
+    "search": "Cerca",
+    "filter": "Filtra",
+    "sort": "Ordina",
+    "asc": "Crescente",
+    "desc": "Decrescente",
+    "noData": "Nessun dato disponibile",
+    "showMore": "Mostra di più",
+    "showLess": "Mostra meno"
+  },
+  "errors": {
+    "required": "Questo campo è obbligatorio",
+    "invalidEmail": "Indirizzo email non valido",
+    "passwordLength": "La password deve contenere almeno 8 caratteri",
+    "passwordMatch": "Le password non coincidono",
+    "serverError": "Errore del server. Riprova più tardi.",
+    "unauthorized": "Non autorizzato. Effettua l'accesso.",
+    "notFound": "Risorsa non trovata.",
+    "conflict": "Questa risorsa esiste già.",
+    "unknown": "Si è verificato un errore sconosciuto."
+  }
+}

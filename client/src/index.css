@@ -56,3 +56,192 @@
     @apply font-sans antialiased bg-background text-foreground;
   }
 }
+
+/* RTL Support */
+.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Language-specific font families */
+html[lang="ar"] body {
+  font-family: 'Cairo', sans-serif;
+}
+
+html[lang="zh"] body {
+  font-family: 'Noto Sans SC', sans-serif;
+}
+
+/* Override for RTL languages */
+html[dir="rtl"] {
+  /* Flip margins and paddings */
+  .mr-1, .mr-2, .mr-3, .mr-4 {
+    margin-right: 0 !important;
+  }
+  
+  .mr-1 {
+    margin-left: 0.25rem !important;
+  }
+  
+  .mr-2 {
+    margin-left: 0.5rem !important;
+  }
+  
+  .mr-3 {
+    margin-left: 0.75rem !important;
+  }
+  
+  .mr-4 {
+    margin-left: 1rem !important;
+  }
+  
+  .ml-1, .ml-2, .ml-3, .ml-4 {
+    margin-left: 0 !important;
+  }
+  
+  .ml-1 {
+    margin-right: 0.25rem !important;
+  }
+  
+  .ml-2 {
+    margin-right: 0.5rem !important;
+  }
+  
+  .ml-3 {
+    margin-right: 0.75rem !important;
+  }
+  
+  .ml-4 {
+    margin-right: 1rem !important;
+  }
+
+  /* Flip padding */
+  .pl-1, .pl-2, .pl-3, .pl-4, .pl-5, .pl-6, .pl-8, .pl-10 {
+    padding-left: 0 !important;
+  }
+  
+  .pl-1 {
+    padding-right: 0.25rem !important;
+  }
+  
+  .pl-2 {
+    padding-right: 0.5rem !important;
+  }
+  
+  .pl-3 {
+    padding-right: 0.75rem !important;
+  }
+  
+  .pl-4 {
+    padding-right: 1rem !important;
+  }
+  
+  .pl-5 {
+    padding-right: 1.25rem !important;
+  }
+  
+  .pl-6 {
+    padding-right: 1.5rem !important;
+  }
+  
+  .pl-8 {
+    padding-right: 2rem !important;
+  }
+  
+  .pl-10 {
+    padding-right: 2.5rem !important;
+  }
+  
+  .pr-1, .pr-2, .pr-3, .pr-4, .pr-5, .pr-6, .pr-8, .pr-10 {
+    padding-right: 0 !important;
+  }
+  
+  .pr-1 {
+    padding-left: 0.25rem !important;
+  }
+  
+  .pr-2 {
+    padding-left: 0.5rem !important;
+  }
+  
+  .pr-3 {
+    padding-left: 0.75rem !important;
+  }
+  
+  .pr-4 {
+    padding-left: 1rem !important;
+  }
+  
+  .pr-5 {
+    padding-left: 1.25rem !important;
+  }
+  
+  .pr-6 {
+    padding-left: 1.5rem !important;
+  }
+  
+  .pr-8 {
+    padding-left: 2rem !important;
+  }
+  
+  .pr-10 {
+    padding-left: 2.5rem !important;
+  }
+  
+  /* Swap left/right positions for absolute positioned elements */
+  .left-0, .left-1, .left-2, .left-3, .left-4, .left-5 {
+    left: auto !important;
+  }
+  
+  .left-0 {
+    right: 0 !important;
+  }
+  
+  .left-1 {
+    right: 0.25rem !important;
+  }
+  
+  .left-2 {
+    right: 0.5rem !important;
+  }
+  
+  .left-3 {
+    right: 0.75rem !important;
+  }
+  
+  .left-4 {
+    right: 1rem !important;
+  }
+  
+  .left-5 {
+    right: 1.25rem !important;
+  }
+  
+  .right-0, .right-1, .right-2, .right-3, .right-4, .right-5 {
+    right: auto !important;
+  }
+  
+  .right-0 {
+    left: 0 !important;
+  }
+  
+  .right-1 {
+    left: 0.25rem !important;
+  }
+  
+  .right-2 {
+    left: 0.5rem !important;
+  }
+  
+  .right-3 {
+    left: 0.75rem !important;
+  }
+  
+  .right-4 {
+    left: 1rem !important;
+  }
+  
+  .right-5 {
+    left: 1.25rem !important;
+  }
+}

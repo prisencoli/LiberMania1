@@ -1,0 +1,250 @@
+{
+  "app": {
+    "name": "ليبر مانيا",
+    "tagline": "تبادل الكتب، ربط القراء."
+  },
+  "auth": {
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "logout": "تسجيل الخروج",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "forgotPassword": "نسيت كلمة المرور؟",
+    "username": "اسم المستخدم",
+    "nickname": "اللقب",
+    "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
+    "dontHaveAccount": "ليس لديك حساب؟",
+    "signUp": "إنشاء حساب",
+    "orContinueWith": "أو تابع باستخدام",
+    "google": "جوجل",
+    "facebook": "فيسبوك",
+    "loginSuccess": "تم تسجيل الدخول بنجاح",
+    "registerSuccess": "تم التسجيل بنجاح",
+    "logoutSuccess": "تم تسجيل الخروج بنجاح",
+    "loginError": "فشل تسجيل الدخول",
+    "registerError": "فشل التسجيل",
+    "logoutError": "فشل تسجيل الخروج"
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "availableBooks": "تصفح",
+    "myCollection": "كتبي",
+    "exchanges": "التبادلات",
+    "wishlist": "قائمة الرغبات",
+    "about": "من نحن",
+    "help": "المساعدة",
+    "contact": "اتصل بنا",
+    "terms": "الشروط",
+    "privacy": "الخصوصية"
+  },
+  "home": {
+    "hero": {
+      "title": "تبادل الكتب، مشاركة القصص",
+      "subtitle": "انضم إلى مجتمع القراءة المستدامة. تبادل كتبك واكتشف قصصًا جديدة.",
+      "cta": "ابدأ الآن"
+    },
+    "features": {
+      "title": "كيف يعمل",
+      "subtitle": "قراءة بسيطة ومستدامة واجتماعية",
+      "exchangeTitle": "تبادل الكتب",
+      "exchangeDesc": "تبادل كتبك مع مستخدمين آخرين مقابل رصيد أو تبادلات مباشرة.",
+      "discoverTitle": "اكتشف قراءات جديدة",
+      "discoverDesc": "اعثر على كتابك المفضل القادم من مكتبتنا المجتمعية المتنوعة.",
+      "communityTitle": "انضم إلى المجتمع",
+      "communityDesc": "تواصل مع القراء الآخرين وشارك تجربة القراءة الخاصة بك."
+    },
+    "stats": {
+      "title": "مجتمعنا بالأرقام",
+      "users": "المستخدمون",
+      "books": "الكتب",
+      "exchanges": "التبادلات"
+    }
+  },
+  "books": {
+    "search": "ابحث عن كتب بالعنوان أو المؤلف أو الرقم المعياري الدولي للكتاب",
+    "addBook": "إضافة كتاب",
+    "addByIsbn": "إضافة بواسطة ISBN",
+    "scan": "مسح",
+    "noResults": "لم يتم العثور على كتب",
+    "loading": "جاري تحميل الكتب...",
+    "title": "العنوان",
+    "author": "المؤلف",
+    "publisher": "الناشر",
+    "publishedDate": "تاريخ النشر",
+    "description": "الوصف",
+    "isbn": "ISBN",
+    "pages": "الصفحات",
+    "language": "اللغة",
+    "category": "الفئة",
+    "condition": "الحالة",
+    "addToCollection": "إضافة إلى مجموعتي",
+    "addToWishlist": "إضافة إلى قائمة الرغبات",
+    "removeFromWishlist": "إزالة من قائمة الرغبات",
+    "proposeExchange": "اقتراح تبادل",
+    "details": "التفاصيل",
+    "reviews": "المراجعات",
+    "writeReview": "كتابة مراجعة",
+    "submitReview": "إرسال",
+    "rating": "التقييم",
+    "reviewTitle": "العنوان",
+    "reviewContent": "المراجعة",
+    "conditions": {
+      "new": "جديد",
+      "likeNew": "كالجديد",
+      "veryGood": "جيد جداً",
+      "good": "جيد",
+      "acceptable": "مقبول",
+      "poor": "سيء"
+    },
+    "availability": {
+      "available": "متوفر",
+      "notAvailable": "غير متوفر",
+      "exchanged": "تم تبادله"
+    }
+  },
+  "exchanges": {
+    "title": "التبادلات",
+    "propose": "اقتراح تبادل",
+    "sent": "مرسلة",
+    "received": "مستلمة",
+    "history": "السجل",
+    "noExchanges": "لم يتم العثور على تبادلات",
+    "loading": "جاري تحميل التبادلات...",
+    "status": {
+      "pending": "قيد الانتظار",
+      "accepted": "مقبول",
+      "rejected": "مرفوض",
+      "canceled": "ملغى",
+      "completed": "مكتمل"
+    },
+    "actions": {
+      "accept": "قبول",
+      "reject": "رفض",
+      "cancel": "إلغاء",
+      "complete": "إكمال",
+      "viewDetails": "عرض التفاصيل",
+      "sendMessage": "إرسال رسالة"
+    },
+    "offerTypes": {
+      "book": "كتاب",
+      "credits": "رصيد"
+    },
+    "messages": {
+      "placeholder": "اكتب رسالتك...",
+      "send": "إرسال",
+      "noMessages": "لا توجد رسائل بعد"
+    },
+    "proposeForm": {
+      "selectBook": "اختر كتابًا للتبادل",
+      "selectOption": "اختر خيار التبادل",
+      "offerBook": "تقديم كتاب",
+      "offerCredits": "تقديم رصيد",
+      "enterCredits": "أدخل مقدار الرصيد",
+      "message": "إضافة رسالة (اختياري)",
+      "submit": "اقتراح التبادل"
+    }
+  },
+  "user": {
+    "profile": "الملف الشخصي",
+    "settings": "الإعدادات",
+    "myCollection": "مجموعتي",
+    "exchanges": "التبادلات",
+    "wishlist": "قائمة الرغبات",
+    "joinedDate": "تاريخ الانضمام",
+    "location": "الموقع",
+    "bio": "السيرة الذاتية",
+    "edit": "تعديل الملف الشخصي",
+    "save": "حفظ التغييرات",
+    "cancel": "إلغاء",
+    "statistics": {
+      "booksAdded": "الكتب المضافة",
+      "booksExchanged": "الكتب المتبادلة",
+      "reviewsWritten": "المراجعات المكتوبة"
+    }
+  },
+  "credits": {
+    "balance": "رصيد النقاط",
+    "history": "سجل المعاملات",
+    "buyCredits": "شراء نقاط",
+    "earnCredits": "اكتساب نقاط",
+    "transactions": {
+      "earned": "مكتسبة",
+      "spent": "منفقة",
+      "refunded": "مستردة"
+    },
+    "purchase": {
+      "title": "شراء نقاط",
+      "selectPackage": "اختر باقة",
+      "package1": "10 نقاط",
+      "package2": "25 نقطة",
+      "package3": "50 نقطة",
+      "package4": "100 نقطة",
+      "checkout": "إتمام الشراء",
+      "paymentMethod": "طريقة الدفع",
+      "cardDetails": "تفاصيل البطاقة",
+      "cardNumber": "رقم البطاقة",
+      "cardName": "الاسم على البطاقة",
+      "expiryDate": "تاريخ الانتهاء",
+      "cvc": "رمز التحقق",
+      "completePayment": "إتمام الدفع"
+    }
+  },
+  "notifications": {
+    "title": "الإشعارات",
+    "markAllRead": "تعليم الكل كمقروء",
+    "empty": "لا توجد إشعارات جديدة",
+    "viewAll": "عرض الكل",
+    "types": {
+      "exchangeRequest": "طلب تبادل",
+      "exchangeAccepted": "تم قبول التبادل",
+      "exchangeRejected": "تم رفض التبادل",
+      "exchangeCanceled": "تم إلغاء التبادل",
+      "exchangeCompleted": "تم إكمال التبادل",
+      "bookAvailable": "كتاب متوفر",
+      "feedbackReceived": "تم استلام تعليق",
+      "boostActive": "التعزيز نشط",
+      "boostExpired": "انتهى التعزيز",
+      "creditsEarned": "تم اكتساب نقاط",
+      "creditsSpent": "تم إنفاق نقاط",
+      "newMessage": "رسالة جديدة"
+    }
+  },
+  "common": {
+    "loading": "جاري التحميل...",
+    "error": "حدث خطأ",
+    "retry": "إعادة المحاولة",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "view": "عرض",
+    "confirm": "تأكيد",
+    "back": "رجوع",
+    "next": "التالي",
+    "submit": "إرسال",
+    "success": "نجاح",
+    "warning": "تحذير",
+    "info": "معلومات",
+    "close": "إغلاق",
+    "search": "بحث",
+    "filter": "تصفية",
+    "sort": "ترتيب",
+    "asc": "تصاعدي",
+    "desc": "تنازلي",
+    "noData": "لا توجد بيانات متاحة",
+    "showMore": "عرض المزيد",
+    "showLess": "عرض أقل"
+  },
+  "errors": {
+    "required": "هذا الحقل مطلوب",
+    "invalidEmail": "عنوان بريد إلكتروني غير صالح",
+    "passwordLength": "يجب أن تكون كلمة المرور 8 أحرف على الأقل",
+    "passwordMatch": "كلمات المرور غير متطابقة",
+    "serverError": "خطأ في الخادم. الرجاء المحاولة مرة أخرى لاحقاً.",
+    "unauthorized": "غير مصرح. الرجاء تسجيل الدخول.",
+    "notFound": "المورد غير موجود.",
+    "conflict": "هذا المورد موجود بالفعل.",
+    "unknown": "حدث خطأ غير معروف."
+  }
+}

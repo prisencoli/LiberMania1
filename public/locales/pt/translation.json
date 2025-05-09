@@ -1,0 +1,250 @@
+{
+  "app": {
+    "name": "LiberMania",
+    "tagline": "Troque livros, conecte leitores."
+  },
+  "auth": {
+    "login": "Entrar",
+    "register": "Cadastrar",
+    "logout": "Sair",
+    "email": "E-mail",
+    "password": "Senha",
+    "confirmPassword": "Confirmar Senha",
+    "forgotPassword": "Esqueceu a senha?",
+    "username": "Nome de usuário",
+    "nickname": "Apelido",
+    "alreadyHaveAccount": "Já tem uma conta?",
+    "dontHaveAccount": "Não tem uma conta?",
+    "signUp": "Cadastre-se",
+    "orContinueWith": "Ou continue com",
+    "google": "Google",
+    "facebook": "Facebook",
+    "loginSuccess": "Login realizado com sucesso",
+    "registerSuccess": "Cadastro realizado com sucesso",
+    "logoutSuccess": "Logout realizado com sucesso",
+    "loginError": "Falha no login",
+    "registerError": "Falha no cadastro",
+    "logoutError": "Falha ao sair"
+  },
+  "nav": {
+    "home": "Início",
+    "availableBooks": "Explorar",
+    "myCollection": "Meus Livros",
+    "exchanges": "Trocas",
+    "wishlist": "Lista de Desejos",
+    "about": "Sobre",
+    "help": "Ajuda",
+    "contact": "Contato",
+    "terms": "Termos",
+    "privacy": "Privacidade"
+  },
+  "home": {
+    "hero": {
+      "title": "Troque Livros, Compartilhe Histórias",
+      "subtitle": "Junte-se à comunidade de leitura sustentável. Troque seus livros e descubra novas histórias.",
+      "cta": "Começar"
+    },
+    "features": {
+      "title": "Como Funciona",
+      "subtitle": "Leitura simples, sustentável e social",
+      "exchangeTitle": "Trocar Livros",
+      "exchangeDesc": "Troque seus livros com outros usuários por créditos ou trocas diretas.",
+      "discoverTitle": "Descobrir Novas Leituras",
+      "discoverDesc": "Encontre seu próximo livro favorito em nossa biblioteca comunitária diversificada.",
+      "communityTitle": "Junte-se à Comunidade",
+      "communityDesc": "Conecte-se com outros leitores e compartilhe sua experiência de leitura."
+    },
+    "stats": {
+      "title": "Nossa Comunidade em Números",
+      "users": "Usuários",
+      "books": "Livros",
+      "exchanges": "Trocas"
+    }
+  },
+  "books": {
+    "search": "Pesquisar livros por título, autor ou ISBN",
+    "addBook": "Adicionar Livro",
+    "addByIsbn": "Adicionar por ISBN",
+    "scan": "Escanear",
+    "noResults": "Nenhum livro encontrado",
+    "loading": "Carregando livros...",
+    "title": "Título",
+    "author": "Autor",
+    "publisher": "Editora",
+    "publishedDate": "Data de publicação",
+    "description": "Descrição",
+    "isbn": "ISBN",
+    "pages": "Páginas",
+    "language": "Idioma",
+    "category": "Categoria",
+    "condition": "Condição",
+    "addToCollection": "Adicionar à Minha Coleção",
+    "addToWishlist": "Adicionar à Lista de Desejos",
+    "removeFromWishlist": "Remover da Lista de Desejos",
+    "proposeExchange": "Propor Troca",
+    "details": "Detalhes",
+    "reviews": "Avaliações",
+    "writeReview": "Escrever uma Avaliação",
+    "submitReview": "Enviar",
+    "rating": "Classificação",
+    "reviewTitle": "Título",
+    "reviewContent": "Avaliação",
+    "conditions": {
+      "new": "Novo",
+      "likeNew": "Como Novo",
+      "veryGood": "Muito Bom",
+      "good": "Bom",
+      "acceptable": "Aceitável",
+      "poor": "Ruim"
+    },
+    "availability": {
+      "available": "Disponível",
+      "notAvailable": "Indisponível",
+      "exchanged": "Trocado"
+    }
+  },
+  "exchanges": {
+    "title": "Trocas",
+    "propose": "Propor Troca",
+    "sent": "Enviadas",
+    "received": "Recebidas",
+    "history": "Histórico",
+    "noExchanges": "Nenhuma troca encontrada",
+    "loading": "Carregando trocas...",
+    "status": {
+      "pending": "Pendente",
+      "accepted": "Aceito",
+      "rejected": "Recusado",
+      "canceled": "Cancelado",
+      "completed": "Concluído"
+    },
+    "actions": {
+      "accept": "Aceitar",
+      "reject": "Recusar",
+      "cancel": "Cancelar",
+      "complete": "Concluir",
+      "viewDetails": "Ver Detalhes",
+      "sendMessage": "Enviar Mensagem"
+    },
+    "offerTypes": {
+      "book": "Livro",
+      "credits": "Créditos"
+    },
+    "messages": {
+      "placeholder": "Digite sua mensagem...",
+      "send": "Enviar",
+      "noMessages": "Ainda não há mensagens"
+    },
+    "proposeForm": {
+      "selectBook": "Selecione um livro para trocar",
+      "selectOption": "Selecione a opção de troca",
+      "offerBook": "Oferecer um livro",
+      "offerCredits": "Oferecer créditos",
+      "enterCredits": "Digite a quantidade de créditos",
+      "message": "Adicionar uma mensagem (opcional)",
+      "submit": "Propor Troca"
+    }
+  },
+  "user": {
+    "profile": "Perfil",
+    "settings": "Configurações",
+    "myCollection": "Minha Coleção",
+    "exchanges": "Trocas",
+    "wishlist": "Lista de Desejos",
+    "joinedDate": "Entrou em",
+    "location": "Localização",
+    "bio": "Biografia",
+    "edit": "Editar Perfil",
+    "save": "Salvar Alterações",
+    "cancel": "Cancelar",
+    "statistics": {
+      "booksAdded": "Livros Adicionados",
+      "booksExchanged": "Livros Trocados",
+      "reviewsWritten": "Avaliações Escritas"
+    }
+  },
+  "credits": {
+    "balance": "Saldo de Créditos",
+    "history": "Histórico de Transações",
+    "buyCredits": "Comprar Créditos",
+    "earnCredits": "Ganhar Créditos",
+    "transactions": {
+      "earned": "Ganhos",
+      "spent": "Gastos",
+      "refunded": "Reembolsados"
+    },
+    "purchase": {
+      "title": "Comprar Créditos",
+      "selectPackage": "Selecione um Pacote",
+      "package1": "10 Créditos",
+      "package2": "25 Créditos",
+      "package3": "50 Créditos",
+      "package4": "100 Créditos",
+      "checkout": "Finalizar Compra",
+      "paymentMethod": "Método de Pagamento",
+      "cardDetails": "Detalhes do Cartão",
+      "cardNumber": "Número do Cartão",
+      "cardName": "Nome no Cartão",
+      "expiryDate": "Data de Validade",
+      "cvc": "CVC",
+      "completePayment": "Concluir Pagamento"
+    }
+  },
+  "notifications": {
+    "title": "Notificações",
+    "markAllRead": "Marcar Todas como Lidas",
+    "empty": "Sem novas notificações",
+    "viewAll": "Ver Todas",
+    "types": {
+      "exchangeRequest": "Solicitação de Troca",
+      "exchangeAccepted": "Troca Aceita",
+      "exchangeRejected": "Troca Recusada",
+      "exchangeCanceled": "Troca Cancelada",
+      "exchangeCompleted": "Troca Concluída",
+      "bookAvailable": "Livro Disponível",
+      "feedbackReceived": "Feedback Recebido",
+      "boostActive": "Boost Ativo",
+      "boostExpired": "Boost Expirado",
+      "creditsEarned": "Créditos Ganhos",
+      "creditsSpent": "Créditos Gastos",
+      "newMessage": "Nova Mensagem"
+    }
+  },
+  "common": {
+    "loading": "Carregando...",
+    "error": "Ocorreu um erro",
+    "retry": "Tentar novamente",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "view": "Visualizar",
+    "confirm": "Confirmar",
+    "back": "Voltar",
+    "next": "Próximo",
+    "submit": "Enviar",
+    "success": "Sucesso",
+    "warning": "Aviso",
+    "info": "Informação",
+    "close": "Fechar",
+    "search": "Pesquisar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "asc": "Crescente",
+    "desc": "Decrescente",
+    "noData": "Nenhum dado disponível",
+    "showMore": "Mostrar Mais",
+    "showLess": "Mostrar Menos"
+  },
+  "errors": {
+    "required": "Este campo é obrigatório",
+    "invalidEmail": "Endereço de e-mail inválido",
+    "passwordLength": "A senha deve ter pelo menos 8 caracteres",
+    "passwordMatch": "As senhas não correspondem",
+    "serverError": "Erro do servidor. Tente novamente mais tarde.",
+    "unauthorized": "Não autorizado. Por favor, faça login.",
+    "notFound": "Recurso não encontrado.",
+    "conflict": "Este recurso já existe.",
+    "unknown": "Ocorreu um erro desconhecido."
+  }
+}

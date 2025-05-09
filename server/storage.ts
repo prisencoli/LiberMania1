@@ -14,8 +14,12 @@ import {
 
 import session from "express-session";
 import createMemoryStore from "memorystore";
+import connectPgSimple from "connect-pg-simple";
+import { pool, db } from "./db";
+import { eq, and, like, desc, or, sql, ilike, asc } from "drizzle-orm";
 
 const MemoryStore = createMemoryStore(session);
+const PgSessionStore = connectPgSimple(session);
 
 // Interface for storage operations
 export interface IStorage {
@@ -597,4 +601,488 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+// Database storage implementation using PostgreSQL
+export class DatabaseStorage implements IStorage {
+  sessionStore: session.SessionStore;
+
+  constructor() {
+    // Create session store with PostgreSQL
+    this.sessionStore = new PgSessionStore({
+      pool,
+      createTableIfMissing: true
+    });
+  }
+
+  // User methods
+  async getUser(id: number): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user;
+  }
+
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user;
+  }
+  
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.email, email));
+    return user;
+  }
+
+  async createUser(insertUser: InsertUser): Promise<User> {
+    const now = new Date();
+    const defaultValues = {
+      role: "user" as const,
+      credits: 50,
+      averageRating: 0,
+      totalRatings: 0,
+      completedExchanges: 0,
+      locationConsent: false,
+      createdAt: now
+    };
+    
+    const [user] = await db.insert(users)
+      .values({ ...insertUser, ...defaultValues })
+      .returning();
+    
+    return user;
+  }
+  
+  async updateUser(id: number, updates: Partial<User>): Promise<User | undefined> {
+    const [updatedUser] = await db.update(users)
+      .set(updates)
+      .where(eq(users.id, id))
+      .returning();
+    
+    return updatedUser;
+  }
+
+  // Book methods
+  async getBook(id: number): Promise<Book | undefined> {
+    const [book] = await db.select().from(books).where(eq(books.id, id));
+    return book;
+  }
+  
+  async getBookByIsbn(isbn: string): Promise<Book | undefined> {
+    const [book] = await db.select().from(books).where(eq(books.isbn, isbn));
+    return book;
+  }
+  
+  async createBook(insertBook: InsertBook): Promise<Book> {
+    const [book] = await db.insert(books)
+      .values(insertBook)
+      .returning();
+    
+    return book;
+  }
+  
+  async searchBooks(query: string): Promise<Book[]> {
+    const results = await db.select().from(books)
+      .where(
+        or(
+          ilike(books.title, `%${query}%`),
+          ilike(books.author, `%${query}%`),
+          like(books.isbn, `%${query}%`)
+        )
+      );
+    
+    return results;
+  }
+  
+  async getAllBooks(): Promise<Book[]> {
+    return await db.select().from(books);
+  }
+
+  // UserBook methods
+  async getUserBook(id: number): Promise<UserBook | undefined> {
+    const [userBook] = await db.select().from(userBooks).where(eq(userBooks.id, id));
+    return userBook;
+  }
+  
+  async getUserBooks(userId: number): Promise<UserBook[]> {
+    return await db.select().from(userBooks).where(eq(userBooks.userId, userId));
+  }
+  
+  async getUserBookWithDetails(id: number): Promise<(UserBook & { book: Book, user: User }) | undefined> {
+    const result = await db.select({
+      userBook: userBooks,
+      book: books,
+      user: users
+    })
+    .from(userBooks)
+    .where(eq(userBooks.id, id))
+    .innerJoin(books, eq(userBooks.bookId, books.id))
+    .innerJoin(users, eq(userBooks.userId, users.id));
+
+    if (result.length === 0) return undefined;
+
+    const { userBook, book, user } = result[0];
+    return { ...userBook, book, user };
+  }
+  
+  async getAvailableUserBooks(options: { limit?: number, offset?: number, query?: string, categoryId?: number } = {}): Promise<(UserBook & { book: Book, user: User })[]> {
+    const { limit = 20, offset = 0, query, categoryId } = options;
+    
+    let queryBuilder = db.select({
+      userBook: userBooks,
+      book: books,
+      user: users
+    })
+    .from(userBooks)
+    .where(eq(userBooks.status, "AVAILABLE"))
+    .innerJoin(books, eq(userBooks.bookId, books.id))
+    .innerJoin(users, eq(userBooks.userId, users.id));
+    
+    if (query) {
+      queryBuilder = queryBuilder.where(
+        or(
+          ilike(books.title, `%${query}%`),
+          ilike(books.author, `%${query}%`),
+          like(books.isbn, `%${query}%`),
+          ilike(users.nickname, `%${query}%`)
+        )
+      );
+    }
+    
+    if (categoryId) {
+      // This is simplified - in a real DB implementation, you'd use a proper categories join
+      queryBuilder = queryBuilder.where(
+        sql`${books.categories}::text LIKE ${'%' + categoryId + '%'}`
+      );
+    }
+    
+    // First sort by boost status then by creation date
+    const result = await queryBuilder
+      .orderBy(desc(userBooks.boostActive), desc(userBooks.createdAt))
+      .limit(limit)
+      .offset(offset);
+    
+    return result.map(({ userBook, book, user }) => ({ ...userBook, book, user }));
+  }
+  
+  async getAvailableUserBooksByBookId(bookId: number): Promise<(UserBook & { user: User })[]> {
+    const result = await db.select({
+      userBook: userBooks,
+      user: users
+    })
+    .from(userBooks)
+    .where(and(
+      eq(userBooks.bookId, bookId),
+      eq(userBooks.status, "AVAILABLE")
+    ))
+    .innerJoin(users, eq(userBooks.userId, users.id));
+    
+    return result.map(({ userBook, user }) => ({ ...userBook, user }));
+  }
+  
+  async createUserBook(insertUserBook: InsertUserBook): Promise<UserBook> {
+    const now = new Date();
+    const defaultValues = {
+      isInShowcase: false,
+      boostActive: false,
+      currentBoostViews: 0,
+      currentBoostClicks: 0,
+      imageUrls: [],
+      createdAt: now,
+      updatedAt: now
+    };
+
+    const [userBook] = await db.insert(userBooks)
+      .values({ ...insertUserBook, ...defaultValues })
+      .returning();
+    
+    return userBook;
+  }
+  
+  async updateUserBook(id: number, updates: Partial<UserBook>): Promise<UserBook | undefined> {
+    const now = new Date();
+    const [updatedUserBook] = await db.update(userBooks)
+      .set({ ...updates, updatedAt: now })
+      .where(eq(userBooks.id, id))
+      .returning();
+    
+    return updatedUserBook;
+  }
+  
+  async deleteUserBook(id: number): Promise<boolean> {
+    const result = await db.delete(userBooks).where(eq(userBooks.id, id));
+    return result.rowCount > 0;
+  }
+
+  // BookReview methods
+  async getBookReview(id: number): Promise<BookReview | undefined> {
+    const [review] = await db.select().from(bookReviews).where(eq(bookReviews.id, id));
+    return review;
+  }
+  
+  async getBookReviewsByBookId(bookId: number): Promise<(BookReview & { user: User })[]> {
+    const result = await db.select({
+      review: bookReviews,
+      user: users
+    })
+    .from(bookReviews)
+    .where(eq(bookReviews.bookId, bookId))
+    .innerJoin(users, eq(bookReviews.userId, users.id));
+    
+    return result.map(({ review, user }) => ({ ...review, user }));
+  }
+  
+  async getBookReviewsByUserId(userId: number): Promise<(BookReview & { book: Book })[]> {
+    const result = await db.select({
+      review: bookReviews,
+      book: books
+    })
+    .from(bookReviews)
+    .where(eq(bookReviews.userId, userId))
+    .innerJoin(books, eq(bookReviews.bookId, books.id));
+    
+    return result.map(({ review, book }) => ({ ...review, book }));
+  }
+  
+  async createBookReview(insertReview: InsertBookReview): Promise<BookReview> {
+    const [review] = await db.insert(bookReviews)
+      .values(insertReview)
+      .returning();
+    
+    return review;
+  }
+
+  // Favorites methods
+  async getFavorite(userId: number, bookId: number): Promise<Favorite | undefined> {
+    const [favorite] = await db.select().from(favorites)
+      .where(and(
+        eq(favorites.userId, userId),
+        eq(favorites.bookId, bookId)
+      ));
+    
+    return favorite;
+  }
+  
+  async getUserFavorites(userId: number): Promise<(Favorite & { book: Book })[]> {
+    const result = await db.select({
+      favorite: favorites,
+      book: books
+    })
+    .from(favorites)
+    .where(eq(favorites.userId, userId))
+    .innerJoin(books, eq(favorites.bookId, books.id));
+    
+    return result.map(({ favorite, book }) => ({ ...favorite, book }));
+  }
+  
+  async createFavorite(insertFavorite: InsertFavorite): Promise<Favorite> {
+    const [favorite] = await db.insert(favorites)
+      .values(insertFavorite)
+      .returning();
+    
+    return favorite;
+  }
+  
+  async deleteFavorite(userId: number, bookId: number): Promise<boolean> {
+    const result = await db.delete(favorites)
+      .where(and(
+        eq(favorites.userId, userId),
+        eq(favorites.bookId, bookId)
+      ));
+    
+    return result.rowCount > 0;
+  }
+
+  // Exchange methods
+  async getExchange(id: number): Promise<Exchange | undefined> {
+    const [exchange] = await db.select().from(exchanges).where(eq(exchanges.id, id));
+    return exchange;
+  }
+  
+  async getExchangeWithDetails(id: number): Promise<(Exchange & { 
+    offerer: User, 
+    receiver: User, 
+    offeredUserBook?: UserBook & { book: Book },
+    requestedUserBook: UserBook & { book: Book }
+  }) | undefined> {
+    const exchange = await this.getExchange(id);
+    if (!exchange) return undefined;
+    
+    const [offerer] = await db.select().from(users).where(eq(users.id, exchange.offererId));
+    const [receiver] = await db.select().from(users).where(eq(users.id, exchange.receiverId));
+    
+    if (!offerer || !receiver) return undefined;
+    
+    // Get the requested user book with book details
+    const requestedResult = await db.select({
+      userBook: userBooks,
+      book: books
+    })
+    .from(userBooks)
+    .where(eq(userBooks.id, exchange.requestedUserBookId))
+    .innerJoin(books, eq(userBooks.bookId, books.id));
+    
+    if (requestedResult.length === 0) return undefined;
+    const requestedUserBook = { ...requestedResult[0].userBook, book: requestedResult[0].book };
+    
+    // Get the offered user book with book details (if applicable)
+    let offeredUserBook: (UserBook & { book: Book }) | undefined = undefined;
+    if (exchange.offeredUserBookId) {
+      const offeredResult = await db.select({
+        userBook: userBooks,
+        book: books
+      })
+      .from(userBooks)
+      .where(eq(userBooks.id, exchange.offeredUserBookId))
+      .innerJoin(books, eq(userBooks.bookId, books.id));
+      
+      if (offeredResult.length > 0) {
+        offeredUserBook = { ...offeredResult[0].userBook, book: offeredResult[0].book };
+      }
+    }
+    
+    return { 
+      ...exchange, 
+      offerer, 
+      receiver, 
+      offeredUserBook, 
+      requestedUserBook 
+    };
+  }
+  
+  async getUserExchanges(userId: number, type?: "sent" | "received"): Promise<(Exchange & { 
+    offerer: User, 
+    receiver: User, 
+    offeredUserBook?: UserBook & { book: Book },
+    requestedUserBook: UserBook & { book: Book }
+  })[]> {
+    // Build the query based on the type
+    let query;
+    if (type === "sent") {
+      query = eq(exchanges.offererId, userId);
+    } else if (type === "received") {
+      query = eq(exchanges.receiverId, userId);
+    } else {
+      query = or(
+        eq(exchanges.offererId, userId),
+        eq(exchanges.receiverId, userId)
+      );
+    }
+    
+    const exchangesList = await db.select().from(exchanges).where(query);
+    
+    // Fetch all the details for each exchange
+    const detailedExchanges = await Promise.all(
+      exchangesList.map(exchange => this.getExchangeWithDetails(exchange.id))
+    );
+    
+    return detailedExchanges.filter(ex => ex !== undefined) as (Exchange & { 
+      offerer: User, 
+      receiver: User, 
+      offeredUserBook?: UserBook & { book: Book },
+      requestedUserBook: UserBook & { book: Book }
+    })[];
+  }
+  
+  async createExchange(insertExchange: InsertExchange): Promise<Exchange> {
+    const [exchange] = await db.insert(exchanges)
+      .values(insertExchange)
+      .returning();
+    
+    return exchange;
+  }
+  
+  async updateExchangeStatus(id: number, status: ExchangeStatus): Promise<Exchange | undefined> {
+    const [updatedExchange] = await db.update(exchanges)
+      .set({ status })
+      .where(eq(exchanges.id, id))
+      .returning();
+    
+    return updatedExchange;
+  }
+
+  // Exchange Message methods
+  async getExchangeMessages(exchangeId: number): Promise<(ExchangeMessage & { sender: User })[]> {
+    const result = await db.select({
+      message: exchangeMessages,
+      sender: users
+    })
+    .from(exchangeMessages)
+    .where(eq(exchangeMessages.exchangeId, exchangeId))
+    .innerJoin(users, eq(exchangeMessages.senderId, users.id))
+    .orderBy(asc(exchangeMessages.createdAt));
+    
+    return result.map(({ message, sender }) => ({ ...message, sender }));
+  }
+  
+  async createExchangeMessage(insertMessage: InsertExchangeMessage): Promise<ExchangeMessage> {
+    const [message] = await db.insert(exchangeMessages)
+      .values(insertMessage)
+      .returning();
+    
+    return message;
+  }
+
+  // Wallet Transaction methods
+  async getWalletBalance(userId: number): Promise<number> {
+    // Sum all transactions for the user
+    const result = await db.select({
+      earned: sql<number>`COALESCE(SUM(CASE WHEN ${walletTransactions.type} = 'EARNED' OR ${walletTransactions.type} = 'REFUNDED' THEN ${walletTransactions.amount} ELSE 0 END), 0)`,
+      spent: sql<number>`COALESCE(SUM(CASE WHEN ${walletTransactions.type} = 'SPENT' THEN ${walletTransactions.amount} ELSE 0 END), 0)`
+    })
+    .from(walletTransactions)
+    .where(eq(walletTransactions.userId, userId));
+    
+    if (result.length === 0) return 0;
+    return result[0].earned - result[0].spent;
+  }
+  
+  async getWalletTransactions(userId: number): Promise<WalletTransaction[]> {
+    return await db.select().from(walletTransactions)
+      .where(eq(walletTransactions.userId, userId))
+      .orderBy(desc(walletTransactions.createdAt));
+  }
+  
+  async createWalletTransaction(insertTransaction: InsertWalletTransaction): Promise<WalletTransaction> {
+    const [transaction] = await db.insert(walletTransactions)
+      .values(insertTransaction)
+      .returning();
+    
+    return transaction;
+  }
+
+  // Notification methods
+  async getUserNotifications(userId: number, limit: number = 20): Promise<Notification[]> {
+    return await db.select().from(notifications)
+      .where(eq(notifications.userId, userId))
+      .orderBy(desc(notifications.createdAt))
+      .limit(limit);
+  }
+  
+  async createNotification(notification: Pick<Notification, 'userId' | 'type' | 'content' | 'relatedEntityId' | 'relatedEntityType'>): Promise<Notification> {
+    const now = new Date();
+    const [newNotification] = await db.insert(notifications)
+      .values({
+        ...notification,
+        read: false,
+        createdAt: now
+      })
+      .returning();
+    
+    return newNotification;
+  }
+  
+  async markNotificationAsRead(id: number): Promise<boolean> {
+    const result = await db.update(notifications)
+      .set({ read: true })
+      .where(eq(notifications.id, id));
+    
+    return result.rowCount > 0;
+  }
+  
+  async markAllNotificationsAsRead(userId: number): Promise<boolean> {
+    const result = await db.update(notifications)
+      .set({ read: true })
+      .where(eq(notifications.userId, userId));
+    
+    return result.rowCount > 0;
+  }
+}
+
+// Use Database Storage instead of Memory Storage
+export const storage = new DatabaseStorage();

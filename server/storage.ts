@@ -6,7 +6,7 @@ import {
   favorites, type Favorite, type InsertFavorite,
   exchanges, type Exchange, type InsertExchange,
   exchangeMessages, type ExchangeMessage, type InsertExchangeMessage,
-  exchangeFeedbacks, type ExchangeFeedback,
+  exchangeFeedbacks, 
   walletTransactions, type WalletTransaction, type InsertWalletTransaction,
   notifications, type Notification,
   ExchangeStatus, UserBookStatus
@@ -92,7 +92,7 @@ export interface IStorage {
   markAllNotificationsAsRead(userId: number): Promise<boolean>;
   
   // Session store
-  sessionStore: session.SessionStore;
+  sessionStore: any; // session.Store type
 }
 
 export class MemStorage implements IStorage {
@@ -103,7 +103,7 @@ export class MemStorage implements IStorage {
   private favorites: Map<number, Favorite>;
   private exchanges: Map<number, Exchange>;
   private exchangeMessages: Map<number, ExchangeMessage>;
-  private exchangeFeedbacks: Map<number, ExchangeFeedback>;
+  private exchangeFeedbacks: Map<number, any>; // Using any for ExchangeFeedback
   private walletTransactions: Map<number, WalletTransaction>;
   private notifications: Map<number, Notification>;
   
@@ -118,7 +118,7 @@ export class MemStorage implements IStorage {
   walletTransactionCurrentId: number = 1;
   notificationCurrentId: number = 1;
   
-  sessionStore: session.SessionStore;
+  sessionStore: any; // session.Store type
 
   constructor() {
     this.users = new Map();
@@ -603,7 +603,7 @@ export class MemStorage implements IStorage {
 
 // Database storage implementation using PostgreSQL
 export class DatabaseStorage implements IStorage {
-  sessionStore: session.SessionStore;
+  sessionStore: any; // session.Store type
 
   constructor() {
     // Create session store with PostgreSQL
@@ -637,6 +637,9 @@ export class DatabaseStorage implements IStorage {
       averageRating: 0,
       totalRatings: 0,
       completedExchanges: 0,
+      bio: null,
+      avatarUrl: null,
+      location: null,
       locationConsent: false,
       createdAt: now
     };
@@ -723,18 +726,12 @@ export class DatabaseStorage implements IStorage {
   async getAvailableUserBooks(options: { limit?: number, offset?: number, query?: string, categoryId?: number } = {}): Promise<(UserBook & { book: Book, user: User })[]> {
     const { limit = 20, offset = 0, query, categoryId } = options;
     
-    let queryBuilder = db.select({
-      userBook: userBooks,
-      book: books,
-      user: users
-    })
-    .from(userBooks)
-    .where(eq(userBooks.status, "AVAILABLE"))
-    .innerJoin(books, eq(userBooks.bookId, books.id))
-    .innerJoin(users, eq(userBooks.userId, users.id));
+    // Build all filters first
+    let filters = [eq(userBooks.status, "AVAILABLE")]; // Base filter for available books
     
+    // Add search query filter
     if (query) {
-      queryBuilder = queryBuilder.where(
+      filters.push(
         or(
           ilike(books.title, `%${query}%`),
           ilike(books.author, `%${query}%`),
@@ -744,15 +741,25 @@ export class DatabaseStorage implements IStorage {
       );
     }
     
+    // Add category filter
     if (categoryId) {
       // This is simplified - in a real DB implementation, you'd use a proper categories join
-      queryBuilder = queryBuilder.where(
-        sql`${books.categories}::text LIKE ${'%' + categoryId + '%'}`
-      );
+      filters.push(sql`${books.categories}::text LIKE ${'%' + categoryId + '%'}`);
     }
     
-    // First sort by boost status then by creation date
-    const result = await queryBuilder
+    // Execute query with all filters applied at once
+    let baseQuery = db.select({
+      userBook: userBooks,
+      book: books,
+      user: users
+    })
+    .from(userBooks)
+    .where(and(...filters))
+    .innerJoin(books, eq(userBooks.bookId, books.id))
+    .innerJoin(users, eq(userBooks.userId, users.id));
+    
+    // Execute query with sort order
+    const result = await baseQuery
       .orderBy(desc(userBooks.boostActive), desc(userBooks.createdAt))
       .limit(limit)
       .offset(offset);
@@ -806,7 +813,7 @@ export class DatabaseStorage implements IStorage {
   
   async deleteUserBook(id: number): Promise<boolean> {
     const result = await db.delete(userBooks).where(eq(userBooks.id, id));
-    return result.rowCount > 0;
+    return Boolean(result.rowCount && result.rowCount > 0);
   }
 
   // BookReview methods
@@ -885,7 +892,7 @@ export class DatabaseStorage implements IStorage {
         eq(favorites.bookId, bookId)
       ));
     
-    return result.rowCount > 0;
+    return Boolean(result.rowCount && result.rowCount > 0);
   }
 
   // Exchange methods
@@ -1072,7 +1079,7 @@ export class DatabaseStorage implements IStorage {
       .set({ read: true })
       .where(eq(notifications.id, id));
     
-    return result.rowCount > 0;
+    return Boolean(result.rowCount && result.rowCount > 0);
   }
   
   async markAllNotificationsAsRead(userId: number): Promise<boolean> {
@@ -1080,7 +1087,7 @@ export class DatabaseStorage implements IStorage {
       .set({ read: true })
       .where(eq(notifications.userId, userId));
     
-    return result.rowCount > 0;
+    return Boolean(result.rowCount && result.rowCount > 0);
   }
 }
 

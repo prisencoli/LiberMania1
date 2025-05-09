@@ -3,49 +3,58 @@
 @tailwind utilities;
 
 :root {
-      --background: 0 0% 100%;
---foreground: 20 14.3% 4.1%;
---muted: 60 4.8% 95.9%;
---muted-foreground: 25 5.3% 44.7%;
---popover: 0 0% 100%;
---popover-foreground: 20 14.3% 4.1%;
---card: 0 0% 100%;
---card-foreground: 20 14.3% 4.1%;
---border: 20 5.9% 90%;
---input: 20 5.9% 90%;
---primary: 207 90% 54%;
---primary-foreground: 211 100% 99%;
---secondary: 60 4.8% 95.9%;
---secondary-foreground: 24 9.8% 10%;
---accent: 60 4.8% 95.9%;
---accent-foreground: 24 9.8% 10%;
---destructive: 0 84.2% 60.2%;
---destructive-foreground: 60 9.1% 97.8%;
---ring: 20 14.3% 4.1%;
---radius: 0.5rem;
-  }
-  .dark {
-      --background: 240 10% 3.9%;
---foreground: 0 0% 98%;
---muted: 240 3.7% 15.9%;
---muted-foreground: 240 5% 64.9%;
---popover: 240 10% 3.9%;
---popover-foreground: 0 0% 98%;
---card: 240 10% 3.9%;
---card-foreground: 0 0% 98%;
---border: 240 3.7% 15.9%;
---input: 240 3.7% 15.9%;
---primary: 207 90% 54%;
---primary-foreground: 211 100% 99%;
---secondary: 240 3.7% 15.9%;
---secondary-foreground: 0 0% 98%;
---accent: 240 3.7% 15.9%;
---accent-foreground: 0 0% 98%;
---destructive: 0 62.8% 30.6%;
---destructive-foreground: 0 0% 98%;
---ring: 240 4.9% 83.9%;
---radius: 0.5rem;
-  }
+  --background: 0 0% 100%;
+  --foreground: 20 14.3% 4.1%;
+  --muted: 60 4.8% 95.9%;
+  --muted-foreground: 25 5.3% 44.7%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 14.3% 4.1%;
+  --card: 0 0% 100%;
+  --card-foreground: 20 14.3% 4.1%;
+  --border: 20 5.9% 90%;
+  --input: 20 5.9% 90%;
+  --primary: 207 90% 54%;
+  --primary-foreground: 211 100% 99%;
+  --secondary: 60 4.8% 95.9%;
+  --secondary-foreground: 24 9.8% 10%;
+  --accent: 60 4.8% 95.9%;
+  --accent-foreground: 24 9.8% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --ring: 20 14.3% 4.1%;
+  --radius: 0.5rem;
+  
+  /* Variabili per animazioni */
+  --transition-fast: 150ms;
+  --transition-normal: 250ms;
+  --transition-slow: 350ms;
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --primary: 207 90% 54%;
+  --primary-foreground: 211 100% 99%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 240 4.9% 83.9%;
+  --radius: 0.5rem;
+}
 
 @layer base {
   * {
@@ -55,6 +64,181 @@
   body {
     @apply font-sans antialiased bg-background text-foreground;
   }
+  
+  /* Importa i font necessari per tutte le lingue supportate */
+  @font-face {
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+  }
+
+  @font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap');
+  }
+}
+
+/* Classi per rendere il sito più dinamico */
+.app-loading {
+  opacity: 0.9;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.app-loaded {
+  opacity: 1;
+  transition: all 0.4s ease-out;
+}
+
+/* Aggiungi animazioni fluide per i cambi di pagina */
+main {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.page-transition {
+  animation: fadeIn 0.5s var(--ease-out);
+  transition: all 0.4s var(--ease-in-out);
+}
+
+/* Animazioni per le diverse sezioni */
+.page-transition.home-section {
+  animation: fadeInScale 0.6s var(--ease-out);
+}
+
+.page-transition.books-section {
+  animation: slideInRight 0.5s var(--ease-out);
+}
+
+.page-transition.exchanges-section {
+  animation: slideInBottom 0.5s var(--ease-out);
+}
+
+.page-transition.chat-section {
+  animation: fadeInFast 0.4s var(--ease-out);
+}
+
+.page-transition.auth-section {
+  animation: fadeInBlur 0.6s var(--ease-bounce);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInFast {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInBlur {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+    transform: scale(1.02);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+/* Aggiungi effetti hover dinamici sui componenti interattivi */
+.card, .button, [role="button"] {
+  transition: transform var(--transition-normal) var(--ease-out),
+              box-shadow var(--transition-normal) var(--ease-out),
+              background-color var(--transition-fast) linear;
+}
+
+.card:hover, .button:hover, [role="button"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+              0 8px 10px -6px rgba(0, 0, 0, 0.05);
+}
+
+/* Effetti per i bottoni */
+button:not(:disabled):active, 
+.button:not(:disabled):active,
+[role="button"]:not(:disabled):active {
+  transform: translateY(1px);
+  transition: transform 0.1s;
+}
+
+/* Stili specifici per lingue RTL */
+html[dir="rtl"] .app-loaded {
+  animation: fadeInRtl 0.5s ease-out;
+}
+
+@keyframes fadeInRtl {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Classi per gestione font per diverse lingue */
+.font-arabic {
+  font-family: 'Cairo', sans-serif;
+  letter-spacing: 0;
+  line-height: 1.6;
+}
+
+.font-chinese {
+  font-family: 'Noto Sans SC', sans-serif;
+  letter-spacing: 0;
+  line-height: 1.7;
 }
 
 /* RTL Support */

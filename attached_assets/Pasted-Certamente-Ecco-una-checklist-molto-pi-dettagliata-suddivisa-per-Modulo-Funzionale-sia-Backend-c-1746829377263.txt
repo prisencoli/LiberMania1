@@ -1,0 +1,375 @@
+Certamente! Ecco una checklist molto più dettagliata, suddivisa per Modulo Funzionale (sia Backend che Frontend, dove applicabile). Questo ti aiuterà a tenere traccia di ogni singolo pezzo, dalle entità alle API, ai componenti UI.
+
+Checklist Dettagliata Progetto LiberMania (Web First)
+
+Fase 0: Setup e Configurazione Globale
+
+Ambiente Sviluppo Locale:
+
+Node.js e npm/yarn installati e funzionanti.
+
+PostgreSQL installato, server in esecuzione.
+
+Database libermania_db creato con utente dedicato (libermania_user).
+
+pgAdmin o simile per accesso al DB.
+
+Git inizializzato per backend e frontend.
+
+VS Code (o altro editor) configurato.
+
+Progetto Backend (NestJS):
+
+Progetto creato (nest new libermania-backend).
+
+Dipendenze principali installate (@nestjs/config, @nestjs/typeorm, typeorm, pg, class-validator, class-transformer, bcrypt).
+
+File .env creato con variabili DB, JWT, ecc.
+
+ConfigModule configurato in app.module.ts (isGlobal: true).
+
+TypeOrmModule configurato in app.module.ts (connessione DB, caricamento entità - usare elenco esplicito).
+
+ValidationPipe globale configurato in main.ts.
+
+CORS configurato in main.ts.
+
+Body Parser per rawBody configurato in main.ts (per webhook).
+
+Progetto Frontend (Next.js):
+
+Progetto creato (create-next-app con TypeScript, Tailwind, App Router).
+
+Variabili d'ambiente (.env.local) create (NEXT_PUBLIC_API_URL, chiavi pubblicabili Stripe/PayPal, GA ID, ecc.).
+
+Configurazione Tailwind (tailwind.config.js) con font e colori custom.
+
+globals.css aggiornato.
+
+Layout Radice (src/app/layout.tsx) con font, AuthProvider, Header, Footer, Toaster, CookieConsent.
+
+Servizi Esterni (Account Creati):
+
+Google Cloud Platform (per Google Books API, Google Places API).
+
+Cloudinary (per storage immagini).
+
+Stripe (account, chiavi API test/live, webhook endpoint creato).
+
+PayPal (account developer sandbox/live, app creata, credenziali, webhook ID).
+
+Firebase (progetto creato, service account key generata per FCM).
+
+(Opzionale) Servizio Email Transazionale (SendGrid/Mailgun/etc., API key).
+
+(Opzionale) Google Analytics (Property ID).
+
+Modulo: Autenticazione (AuthModule)
+
+Backend:
+
+File src/auth/auth.module.ts (import UsersModule, PassportModule, JwtModule, WalletModule?, ConfigModule, export AuthService).
+
+File src/auth/auth.service.ts (logica register, validateUser, login, iniezione dipendenze corrette).
+
+File src/auth/auth.controller.ts (endpoint POST /register, POST /login, GET /me - protetto).
+
+File src/auth/strategies/jwt.strategy.ts (Classe JwtStrategy esportata, interfaccia JwtPayload esportata, logica validate, gestione JWT_SECRET).
+
+File src/auth/strategies/local.strategy.ts (Classe LocalStrategy esportata, logica validate chiama AuthService.validateUser).
+
+File src/auth/guards/jwt-auth.guard.ts (Classe JwtAuthGuard esportata).
+
+File src/auth/guards/local-auth.guard.ts (Classe LocalAuthGuard esportata).
+
+File src/auth/guards/roles.guard.ts (Classe RolesGuard esportata, usa Reflector).
+
+File src/auth/decorators/roles.decorator.ts (Decorator Roles esportato, costante ROLES_KEY esportata).
+
+DTO src/auth/dto/login.dto.ts (se non inline).
+
+Frontend:
+
+File src/contexts/AuthContext.tsx (AuthProvider, useAuth, logica login, register, logout, gestione token localStorage, fetch utente iniziale con /auth/me).
+
+File src/components/auth/LoginForm.tsx (Form, gestione stato, chiamata login da context).
+
+File src/components/auth/RegisterForm.tsx (Form, gestione stato, chiamata register da context).
+
+Pagina /login.
+
+Pagina /register.
+
+Componente ProtectedRoute.tsx (logica controllo user/isLoading).
+
+Header (src/components/layout/Header.tsx) usa useAuth per UI dinamica.
+
+Modulo: Utenti (UsersModule)
+
+Backend:
+
+File src/users/users.module.ts (import TypeOrmModule.forFeature([User, Book, UserBook]), forwardRef per dipendenze circolari, export UsersService).
+
+File src/users/entities/user.entity.ts (Classe User esportata con TUTTI i campi e relazioni corrette, enum UserRole, UserSubscriptionStatus).
+
+File src/users/users.service.ts (metodi createUser, findByEmail, findById, findProfileById, updateProfile, updateAvatar, updateUserLocation, getFavoriteBooks, addBookToFavorites, removeBookFromFavorites, getShowcaseUserBooks, toggleUserBookShowcase, resolveIdentifierToUserId, findPublicProfile, getPublicShowcaseUserBooks, ecc.).
+
+File src/users/users.controller.ts (endpoint protetti /me/profile, /me/avatar, /me/location, /me/favorites, /me/showcase-books; endpoint pubblici /:identifier/profile, /:identifier/showcase-books, /:identifier/reviews, /:identifier/favorites).
+
+DTO src/users/dto/create-user.dto.ts (esportato).
+
+DTO src/users/dto/update-profile.dto.ts (esportato).
+
+DTO src/users/dto/update-location.dto.ts (esportato).
+
+Frontend:
+
+Pagina /profile/edit (EditProfileForm per nickname, bio, avatar, location, consenso).
+
+Pagina /users/[identifier]/profile (UserProfileClient per visualizzazione pubblica/propria, con stats, vetrina, preferiti, recensioni).
+
+Pagina /my-activity/favorites (MyFavoritesClient per gestione lista desideri).
+
+(Implícito) Header mostra nickname/crediti/badge.
+
+Modulo: Libri (BooksModule)
+
+Backend:
+
+File src/books/books.module.ts (import TypeOrmModule.forFeature([Book, UserBook]), GoogleBooksModule, WalletModule, CloudinaryModule, ConfigModule, AuthModule, forwardRef per dipendenze circolari, export BooksService).
+
+File src/books/entities/book.entity.ts (Classe Book esportata, campi base, googleCategoriesRaw, relazioni userBooks, reviews, categories, favoritedByUsers).
+
+File src/books/entities/user-book.entity.ts (Classe UserBook esportata, enum UserBookStatus, BoostPlacement, campi status, conditionDescription, imageUrls, isInShowcase, campi boost, relazioni user, book).
+
+File src/books/books.service.ts (tutti i metodi: findOrCreateBookByIsbn, findBookDetailsById, searchBooksForReview, addUserBook, findMyUserBooks, findUserBookById, updateUserBook, removeUserBook, findAllAvailableUserBooks (con filtri, sort, boost, distanza), findAvailableUserBooksByBookId, incrementBoostViews, incrementBoostClick, addUserBookImages, removeUserBookImage, findBookEntityById).
+
+File src/books/books.controller.ts (tutti gli endpoint: pubblici per /available, /isbn/:isbn, /:bookId/details, /:bookId/available-copies, /user-book/:userBookId/boost-click, /search; protetti per /my-collection, /my-collection/:userBookId, /my-collection/:userBookId/images).
+
+DTO src/books/dto/create-user-book.dto.ts.
+
+DTO src/books/dto/update-user-book.dto.ts.
+
+Frontend:
+
+Pagina /books/add (AddBookForm).
+
+Pagina /books/my-collection (MyBooksList con azioni).
+
+Pagina /books/edit/[userBookId] (EditBookForm).
+
+Pagina /books/available (BrowseBooksClient con filtri/sort).
+
+Pagina /books/info/[bookId] (BookDetailClient con dettagli, copie, recensioni, preferiti, link affiliati).
+
+Componenti Card (AvailableBookCard, ShowcaseBookCard, FavoriteBookCard).
+
+Componente Skeleton (BookCardSkeleton).
+
+Modulo: Categorie (CategoriesModule)
+
+Backend:
+
+File src/categories/categories.module.ts.
+
+File src/categories/entities/category.entity.ts (Classe Category esportata, enum CategoryType, relazione books).
+
+File src/categories/categories.service.ts (Metodo findAll).
+
+File src/categories/categories.controller.ts (Endpoint pubblico GET /api/categories).
+
+(Admin) Endpoint CRUD per gestione categorie.
+
+Modulo: Scambi (ExchangesModule)
+
+Backend:
+
+File src/exchanges/exchanges.module.ts (import TypeOrmModule.forFeature([Exchange, ExchangeMessage, ExchangeFeedback]), AuthModule, BooksModule, WalletModule, UsersModule, NotificationsModule, export ExchangesService).
+
+File src/exchanges/entities/exchange.entity.ts (Classe Exchange esportata, enum ExchangeStatus, ExchangeOfferType, campi offerta condizionali, relazioni messages, feedbacks).
+
+File src/exchanges/entities/exchange-message.entity.ts (Classe ExchangeMessage esportata, relazioni).
+
+File src/exchanges/entities/exchange-feedback.entity.ts (Classe ExchangeFeedback esportata, UNIQUE constraint, relazioni).
+
+File src/exchanges/exchanges.service.ts (Metodi createExchange, findMyExchanges, findExchangeById, getExchangeAndValidateActor, acceptExchange, rejectExchange, cancelExchangeByOfferer, completeExchange (con logica transazionale crediti/stato), leaveFeedback, updateUserReputation, incrementCompletedExchanges, getFeedbacksForUser).
+
+File src/exchanges/exchanges.controller.ts (API per creare, visualizzare, accettare, rifiutare, cancellare, completare scambi; API per lasciare feedback).
+
+DTO src/exchanges/dto/create-exchange.dto.ts.
+
+DTO src/exchanges/dto/create-exchange-feedback.dto.ts.
+
+Frontend:
+
+Pagina /exchanges/propose (ProposeExchangeForm).
+
+Pagina /exchanges (MyExchangesClient con tab e azioni).
+
+(Futuro) Pagina /exchanges/[exchangeId]/leave-feedback.
+
+(Futuro) Pagina /exchanges/[exchangeId] (dettaglio scambio).
+
+Modulo: Recensioni (ReviewsModule)
+
+Backend:
+
+File src/reviews/reviews.module.ts.
+
+File src/reviews/entities/review.entity.ts (Classe Review esportata, UNIQUE constraint, validazione lunghezza commento).
+
+File src/reviews/reviews.service.ts (Metodi createReview, findReviewsByBookId, findReviewsByUserId, updateReview, deleteReview).
+
+File src/reviews/reviews.controller.ts (API POST /reviews, GET /books/:bookId/reviews, GET /users/:userId/reviews, GET /me/reviews, PUT /reviews/:id, DELETE /reviews/:id).
+
+DTO src/reviews/dto/create-review.dto.ts.
+
+DTO src/reviews/dto/update-review.dto.ts.
+
+Frontend:
+
+Pagina /reviews/new (NewReviewFlow).
+
+Visualizzazione recensioni in /books/info/[bookId].
+
+Visualizzazione recensioni in /users/[identifier]/profile.
+
+Modulo: Wallet (WalletModule)
+
+Backend:
+
+File src/wallet/wallet.module.ts (import TypeOrmModule.forFeature([WalletTransaction, User]), export WalletService).
+
+File src/wallet/entities/wallet-transaction.entity.ts (Classe WalletTransaction esportata, enum TransactionType esportato).
+
+File src/wallet/wallet.service.ts (Metodo createTransaction (atomico), getUserBalance, getUserTransactions, metodi helper award...Bonus).
+
+File src/wallet/wallet.controller.ts (API GET /wallet/balance, GET /wallet/transactions).
+
+Frontend:
+
+Visualizzazione saldo crediti nell'Header.
+
+(Futuro) Pagina /wallet per visualizzare cronologia completa.
+
+Modulo: Pagamenti (PaymentsModule)
+
+Backend:
+
+File src/payments/payments.module.ts.
+
+File src/payments/entities/processed-webhook.entity.ts (con indice univoco).
+
+File src/payments/credit-packages.config.ts (o DB).
+
+File src/payments/subscription-plans.config.ts (o DB).
+
+File src/payments/stripe.service.ts (Creazione sessioni checkout/sub, gestione webhook Stripe, Portale Cliente).
+
+File src/payments/paypal.service.ts (Creazione ordini, cattura, gestione webhook PayPal base).
+
+File src/payments/payments.controller.ts (API per pacchetti, piani, creazione sessioni/ordini, cattura PayPal, webhook Stripe/PayPal).
+
+Frontend:
+
+Pagina /credits/purchase (PurchaseCreditsClient con selezione pacchetto/metodo, integrazione Stripe/PayPal SDK).
+
+Pagina /subscriptions (SubscriptionPlansClient con visualizzazione piani e sottoscrizione Stripe).
+
+Pagina /profile/subscription (ManageSubscriptionClient con stato e link/pulsante gestione Stripe).
+
+Pagine /credits/purchase-success e /credits/purchase-cancel.
+
+Modulo: Boost (BoostsModule)
+
+Backend:
+
+File src/boosts/boosts.module.ts.
+
+File src/boosts/entities/boost-queue-entry.entity.ts (con BoostQueueStatus enum).
+
+File src/boosts/boosts.service.ts (logica activateOrQueueBoost con pagamento anticipato, cron job handleBoostsAndQueue per scadenza/attivazione coda, cancelQueuedBoost con rimborso, metodi API find...).
+
+File src/boosts/boosts.controller.ts (API per pacchetti, attivazione/coda, gestione coda utente, visualizzazione boost attivi/storico).
+
+Frontend:
+
+Modale BoostActivationModal (accessibile da "I Miei Libri").
+
+Pagina /my-activity/boosts (MyBoostsClient con tab Attivi/Storico/Coda, visualizzazione stats views/clicks, gestione coda).
+
+Modulo: Notifiche (NotificationsModule)
+
+Backend:
+
+File src/notifications/notifications.module.ts.
+
+File src/notifications/entities/notification.entity.ts (con NotificationType enum).
+
+File src/notifications/notifications.service.ts (metodi createNotification, getUserNotifications, markAsRead, markAllAsRead, placeholder sendPushNotification).
+
+File src/notifications/notifications.controller.ts (API per leggere/gestire notifiche in-app).
+
+Integrazione chiamate a createNotification nei servizi rilevanti (Exchanges, Boosts, etc.).
+
+Frontend:
+
+Icona Campanella + Badge contatore in Header.tsx (con fetch periodico o via WS).
+
+Componente NotificationsPanel.tsx (dropdown/pannello con notifiche recenti e azioni lettura).
+
+(Futuro) Pagina /notifications per storico completo.
+
+Modulo: Chat (ChatModule)
+
+Backend:
+
+File src/chat/chat.module.ts.
+
+File src/chat/chat.gateway.ts (gestione connessioni, stanze, messaggi, filtro parole, "sta scrivendo").
+
+(Entità ExchangeMessage è in ExchangesModule).
+
+Frontend:
+
+Pagina /chat/exchange/[exchangeId] (ChatInterface).
+
+Integrazione socket.io-client.
+
+Modulo: Admin (AdminModule)
+
+Backend:
+
+File src/admin/admin.module.ts.
+
+Servizi e Controller specifici: AdminDashboardService, AdminUsersService, AdminUserBooksService, AdminReviewsService, AdminReportsService.
+
+API per stats, CRUD utenti, CRUD UserBooks, CRUD Recensioni, Gestione Segnalazioni.
+
+Frontend:
+
+Route group /admin con layout dedicato (AdminLayout, AdminSidebar).
+
+Protezione route (AdminRouteGuard e/o Middleware).
+
+Pagina /admin/dashboard (AdminDashboardPage).
+
+Pagina /admin/users (AdminUsersClient con tabella, filtri, paginazione).
+
+Pagina /admin/users/[userId]/edit (AdminEditUserClient).
+
+Pagina /admin/user-books (AdminUserBooksClient).
+
+Pagina /admin/reviews (AdminReviewsClient).
+
+Pagina /admin/reports (AdminReportsClient).
+
+Pagina /admin/reports/[reportId] (AdminReportDetailClient).
+
+Componenti UI Admin (AdminTable, PaginationControls, ConfirmDeleteModal).
+
+Moduli di Supporto (Cloudinary, FirebaseAdmin, Places, Venues, Categories, GoogleBooks)
+
+Backend: Verifica che ogni modulo esista, importi le dipendenze corrette (es. HttpModule per API esterne, ConfigModule), definisca e esporti il servizio principale, e sia importato correttamente dove necessario (in AppModule se globale, o nei moduli specifici che lo usano).
+
+Questa checklist è estremamente dettagliata. Usala per verificare i file che hai creato, il loro contenuto, le esportazioni e le importazioni tra di essi. Ti aiuterà a identificare sistematicamente i pezzi mancanti o errati. Buona fortuna con il debug!

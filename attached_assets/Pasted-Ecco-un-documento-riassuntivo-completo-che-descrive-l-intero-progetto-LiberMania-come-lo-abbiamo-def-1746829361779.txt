@@ -1,0 +1,164 @@
+Ecco un documento riassuntivo completo che descrive l'intero progetto LiberMania come lo abbiamo definito, includendo la struttura, le funzionalità base (MVP Core) e quelle avanzate. Puoi salvarlo e usarlo come riferimento dettagliato man mano che implementi o rivedi le varie parti.
+Documento di Progetto e Piano Tecnico: LiberMania
+Versione: 1.1 (Aggiornata post-discussione dettagliata)
+Data: [Data Corrente]
+1. Visione del Progetto
+LiberMania è una piattaforma web (con potenziale app mobile futura) che mira a creare una vivace community per lo scambio sostenibile di libri usati. Utilizza un sistema di crediti virtuali per incentivare la partecipazione e rendere gli scambi flessibili, promuovendo la lettura e la cultura condivisa. L'esperienza utente è pensata per essere intuitiva, sicura e piacevole, con un'estetica ispirata al mondo dei libri.
+2. Obiettivi Principali
+Diventare la piattaforma di riferimento per lo scambio di libri usati in Italia (o nel target definito).
+Facilitare migliaia di scambi, promuovendo l'economia circolare applicata ai libri.
+Costruire una community attiva e fidata di lettori.
+Offrire un modello di business sostenibile tramite funzionalità a valore aggiunto (acquisto crediti, abbonamenti, boost, affiliazioni).
+Garantire un ambiente sicuro e moderato per tutti gli utenti.
+3. Architettura Generale e Stack Tecnologico
+Approccio: Sito Web First (Responsive) + API Backend.
+Frontend: React (v18+) con Next.js (v13.4+ App Router), TypeScript, Tailwind CSS, React Hook Form, Axios/SWR/React Query, Socket.IO Client, Framer Motion (opzionale), React-Hot-Toast, React-Cookie-Consent.
+Backend: NestJS (Node.js v18+), TypeScript, PostgreSQL con TypeORM, Passport.js (JWT, Local), bcrypt, class-validator, @nestjs/config, @nestjs/axios, @nestjs/websockets (con Socket.IO), @nestjs/schedule, firebase-admin, cloudinary, SDK Stripe, SDK PayPal.
+Database: PostgreSQL (con estensione PostGIS raccomandata per geolocalizzazione).
+Servizi Esterni: Google Books API, Cloudinary, Stripe, PayPal, FCM, Google Places API, Servizio Email Transazionale (es. SendGrid).
+Hosting: Vercel/Netlify (Frontend), Render/Heroku/AWS/etc. (Backend), DB Gestito (Render/AWS RDS/etc.).
+Controllo Versione: Git (GitHub/GitLab/Bitbucket).
+CI/CD: GitHub Actions / GitLab CI / etc.
+4. Struttura del Progetto (Dettagliata)
+(Vedi la struttura dettagliata delle cartelle per Backend e Frontend fornita nel messaggio intitolato "quindi come dovrà apparire ora il codice aggiornato e completo di app.module.ts?" e successivi per i componenti)
+5. Funzionalità Base (Core MVP)
+Queste sono le funzionalità essenziali per il funzionamento primario della piattaforma.
+5.1 Autenticazione Utente:
+Registrazione tramite Email/Password (con hashing bcrypt).
+Login tramite Email/Password (con strategia Local Passport).
+Gestione Sessione/Token tramite JWT (generato al login, validato da JwtStrategy e JwtAuthGuard).
+Logout.
+(API: POST /auth/register, POST /auth/login, [GET /auth/me - protetto]).
+(FE: Pagine /login, /register, AuthContext, ProtectedRoute, Header dinamico).
+5.2 Aggiunta Libro al Catalogo Personale:
+Input manuale ISBN o Scansione ISBN (via browser - zxing/library o MediaDevices).
+Chiamata API GET /books/isbn/:isbn per recuperare dati.
+Backend (BooksService.findOrCreateBookByIsbn) cerca nel DB locale, se non trova chiama Google Books API, crea/salva entità Book.
+Frontend mostra dettagli libro trovato.
+Utente aggiunge descrizione condizione (opzionale).
+Submit chiama API POST /books/my-collection (protetto).
+Backend (BooksService.addUserBook) crea UserBook con stato default NOT_AVAILABLE, assegna bonus crediti (WalletService).
+Frontend chiede se mettere subito in offerta (chiama PUT /books/my-collection/:userBookId con { status: 'available' } se sì).
+(API: GET /books/isbn/:isbn, POST /books/my-collection).
+(FE: Pagina /books/add, Componente AddBookForm).
+5.3 Sfoglia e Ricerca Libri Disponibili:
+Visualizzazione paginata dei UserBook con stato AVAILABLE.
+Ricerca base per testo (titolo/autore/ISBN) e nickname proprietario.
+Filtro base per categoria.
+Ordinamento base (es. per data aggiunta).
+(API: GET /books/available con query params page, limit, search, ownerNickname, categoryId, sortBy, sortOrder).
+(FE: Pagina /books/available, Componente BrowseBooksClient, AvailableBookCard, PaginationControls, BookCardSkeleton).
+5.4 Pagina Dettaglio Libro Generico (Book):
+Visualizzazione informazioni complete del libro (da entità Book).
+Sezione "Copie Disponibili" (lista UserBook AVAILABLE per questo Book, con link al dettaglio copia e info proprietario).
+Sezione "Recensioni" (lista delle recensioni per questo Book).
+Pulsante "Aggiungi/Rimuovi Preferiti".
+(Opzionale MVP) Form per aggiungere una nuova recensione direttamente qui.
+(API: GET /books/:bookId/details, GET /books/:bookId/available-copies, GET /books/:bookId/reviews, POST/DELETE /users/me/favorites/:bookId).
+(FE: Pagina /books/info/[bookId], Componente BookDetailClient).
+5.5 Gestione "I Miei Libri":
+Lista dei propri UserBook.
+Visualizzazione stato, condizione.
+Azioni: Modifica (link a pagina edit), Metti/Ritira Offerta (cambia stato AVAILABLE/NOT_AVAILABLE), Cancella (con controlli e modale conferma).
+(API: GET /my-collection, PUT /my-collection/:userBookId, DELETE /my-collection/:userBookId).
+(FE: Pagina /books/my-collection, Componente MyBooksList).
+5.6 Proposta di Scambio (Libro-per-Libro e Crediti-per-Libro):
+Pulsante "Proponi Scambio" su card/dettaglio libro disponibile.
+Pagina/Modale (/exchanges/propose) dove si sceglie il tipo di offerta:
+Se Libro: Select con i propri libri AVAILABLE.
+Se Crediti: Input numerico (con validazione vs saldo).
+Campo messaggio opzionale.
+Submit chiama API POST /exchanges.
+Backend (ExchangesService.createExchange) valida l'offerta, controlla crediti (ma non scala), crea Exchange PENDING, aggiorna stato offeredUserBook (se applicabile), invia notifica.
+(API: POST /exchanges, GET /books/my-collection per popolare select).
+(FE: Pagina /exchanges/propose, Componente ProposeExchangeForm).
+5.7 Gestione Scambi ("I Miei Scambi"):
+Pagina con Tab "Ricevute" e "Inviate".
+Visualizzazione card per ogni scambio con stato, libri/crediti, altro utente, data.
+Azioni contestuali: Accetta/Rifiuta (per ricevute pending), Annulla (per inviate pending), Completa (per accettate).
+Link alla Chat per scambi PENDING o ACCEPTED.
+(API: GET /exchanges?type=..., PATCH /exchanges/:id/accept, /reject, /cancel, /complete).
+(FE: Pagina /exchanges, Componente MyExchangesClient, renderExchangeCard).
+5.8 Chat per Scambi:
+Pagina dedicata (/chat/exchange/[exchangeId]) accessibile da "I Miei Scambi".
+Connessione WebSocket autenticata alla stanza dello scambio.
+Visualizzazione cronologia messaggi.
+Invio/Ricezione messaggi in tempo reale.
+Salvataggio messaggi nel DB.
+Filtro contenuti base (parole proibite).
+(API/WS: ChatGateway con eventi joinExchangeRoom, leaveExchangeRoom, sendExchangeMessage, newMessage, messageHistory, message_blocked).
+(FE: Pagina /chat/exchange/[exchangeId], Componente ChatInterface, socket.io-client).
+5.9 Recensioni Libri (Scrittura e Visualizzazione):
+Pagina /reviews/new per cercare libro e scrivere recensione (voto + commento min 500 caratteri).
+Visualizzazione recensioni sulla pagina dettaglio libro generico (/books/info/[bookId]).
+(API: GET /books/search, POST /reviews, GET /books/:bookId/reviews).
+(FE: Pagina /reviews/new, Componente NewReviewFlow, Sezione Recensioni in BookDetailClient).
+5.10 Wallet Crediti (Base):
+Visualizzazione saldo crediti nell'Header.
+Assegnazione automatica bonus (registrazione, aggiunta libro, recensione - chiamate da altri servizi a WalletService).
+(API: GET /wallet/balance).
+(FE: Header, Logica bonus nei servizi backend).
+6. Funzionalità Avanzate (Implementate o Delineate)
+6.1 Acquisto Crediti:
+Pagina /credits/purchase con pacchetti crediti.
+Selezione metodo Stripe/PayPal.
+Integrazione con Stripe Checkout / PayPal JS SDK.
+Backend gestisce creazione sessioni/ordini e conferma pagamento via Webhook per assegnare crediti atomicamente (fulfillOrder/fulfillPaypalOrder).
+Pagine successo/cancellazione.
+6.2 Abbonamenti (Stripe):
+Pagina /subscriptions con piani definiti.
+Flusso di sottoscrizione tramite Stripe Checkout (mode: 'subscription').
+Webhook backend per gestire stati (active, canceled, ecc.) e assegnare crediti/vantaggi mensili (invoice.payment_succeeded).
+Pagina /profile/subscription per visualizzare stato e link a Portale Cliente Stripe.
+6.3 Boost Libri:
+Pacchetti boost definiti (durata, posizionamento: Categorie / Homepage+Categorie).
+Modale/UI in "I Miei Libri" per attivare boost pagando crediti.
+Sistema di Slot Limitati (per Homepage) con Coda a Pagamento Anticipato.
+Backend (BoostsService) gestisce attivazione/coda, addebito crediti, cron job per scadenza e attivazione automatica dalla coda (con rimborso se fallisce).
+Backend (BooksService) prioritizza libri boostati in homepage e categorie.
+Tracciamento Visualizzazioni (currentBoostViews) e Click (currentBoostClicks) per boost attivi.
+Pagina /my-activity/boosts per monitorare boost attivi, storico (con stats views/clicks) e coda (con opzione annulla/rimborsa).
+6.4 Reputazione Utente e Feedback Scambi:
+Entità ExchangeFeedback (rating + commento).
+Dopo scambio COMPLETED, utenti possono lasciare feedback reciproco (UI da implementare, es. /exchanges/:id/leave-feedback).
+Backend (ExchangesService.leaveFeedback) salva feedback e ricalcola averageRating, totalRatings sull'utente recensito.
+Notifica per lasciare/ricevere feedback.
+Visualizzazione reputazione e feedback ricevuti sul profilo utente.
+6.5 Lista dei Desideri (Preferiti):
+Pulsante Aggiungi/Rimuovi Preferiti sulla pagina dettaglio libro (Book).
+Pagina /my-activity/favorites per visualizzare/gestire la lista.
+Backend (BooksService.notifyUsersForAvailableBook) invia notifiche quando un UserBook diventa AVAILABLE e corrisponde a un Book nei preferiti di altri utenti.
+6.6 Geolocalizzazione e Luoghi Incontro:
+Campi posizione e consenso su User.
+API e UI per aggiornare posizione.
+Filtro "Distanza Massima" in "Sfoglia Libri" (backend con PostGIS/calcolo distanza).
+Entità SponsoredVenue (gestita da Admin).
+API e UI per suggerire luoghi d'incontro pubblici (bar, caffè, biblioteche) vicini al punto medio tra due utenti, prioritizzando/evidenziando locali partner (via Google Places API).
+6.7 Profilo Utente Pubblico:
+Pagina /users/[identifier]/profile.
+Visualizza avatar, nickname, bio, data membro, statistiche (reputazione, scambi, recensioni), libri in vetrina scelti dall'utente, lista desideri (opzionale), recensioni scritte.
+6.8 Notifiche In-App:
+Entità Notification, NotificationsService, NotificationsController.
+Icona a campanella nell'Header con badge contatore.
+Pannello dropdown con notifiche recenti e azione "leggi".
+Creazione notifiche per eventi chiave (scambi, chat, feedback, disponibilità preferiti, attivazione boost, ecc.).
+6.9 Pannello Admin (API e Frontend Base):
+Autenticazione e layout admin.
+Dashboard statistiche.
+CRUD base Utenti (Lista, Dettagli, Modifica, Aggiusta Crediti, Delete placeholder).
+CRUD base UserBooks (Lista, Filtri, Modifica Stato, Elimina).
+CRUD base Recensioni (Lista, Filtri, Elimina).
+Gestione Segnalazioni (Lista PENDING, Dettaglio Segnalazione, Modifica Stato/Note).
+Email notifica admin per nuove segnalazioni.
+6.10 UI/UX Rifinita:
+Palette colori, tipografia a tema.
+Messaggi Toast.
+Skeleton Loaders.
+Empty States migliorati.
+(Opzionale) Transizioni pagina.
+6.11 Legale e Tracciamento Base:
+Cookie Policy e Banner Consenso.
+Pagina Privacy/Termini.
+Form Iscrizione Newsletter base (con API backend o embed).
+Tracciamento visite libri (UserViewedBook - base).
+(Implícito) Integrazione Analytics (es. Google Analytics).
